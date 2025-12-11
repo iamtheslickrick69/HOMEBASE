@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Building2, ArrowLeft } from "lucide-react"
+import { Building2, ArrowLeft, Sparkles } from "lucide-react"
 import Link from "next/link"
 
 export default function ClinicLoginPage() {
@@ -21,6 +21,10 @@ export default function ClinicLoginPage() {
     console.log("[v0] Clinic login form submitted", { email })
     await login(email, password, "clinic_admin")
     console.log("[v0] Login completed")
+  }
+
+  const handleDemoLogin = async () => {
+    await login("demo@clinic.com", "demo123", "clinic_admin")
   }
 
   return (
@@ -66,6 +70,25 @@ export default function ClinicLoginPage() {
                 {isLoading ? "Signing in..." : "Sign In"}
               </Button>
             </form>
+
+            <div className="relative my-6">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-card px-2 text-muted-foreground">Or</span>
+              </div>
+            </div>
+
+            <Button
+              variant="outline"
+              className="w-full border-dashed border-2 hover:border-primary hover:bg-primary/5"
+              onClick={handleDemoLogin}
+              disabled={isLoading}
+            >
+              <Sparkles className="w-4 h-4 mr-2" />
+              Try Demo Account
+            </Button>
 
             <div className="mt-6 text-center text-sm">
               <Link href="/auth/clinic-register" className="text-primary hover:underline">
