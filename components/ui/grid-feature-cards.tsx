@@ -38,18 +38,18 @@ export function FeatureCard({ feature, className, patternSeed = 0, ...props }: F
                 {/* Horizontal Header Row */}
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                        <div className="flex items-center justify-center w-10 h-10 rounded-xl backdrop-blur-sm bg-gray-500/20 text-gray-300">
+                        <div className="flex items-center justify-center w-10 h-10 rounded-xl backdrop-blur-sm bg-gray-100 text-gray-600">
                             <feature.icon className="w-5 h-5" strokeWidth={1.5} aria-hidden />
                         </div>
-                        <h3 className="text-base font-semibold text-white">{feature.title}</h3>
+                        <h3 className="text-base font-semibold text-gray-900">{feature.title}</h3>
                     </div>
                     {feature.badge && (
-                        <span className="text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm bg-gray-500/20 text-gray-300">
+                        <span className="text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm bg-gray-100 text-gray-600">
                             {feature.badge}
                         </span>
                     )}
                 </div>
-                <p className="text-neutral-400 font-medium relative z-20 text-sm leading-relaxed">{feature.description}</p>
+                <p className="text-gray-500 font-medium relative z-20 text-sm leading-relaxed">{feature.description}</p>
             </div>
         </div>
     );

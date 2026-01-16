@@ -388,31 +388,31 @@ function CardContent({
 
   return (
     <div className="flex h-full w-full flex-col gap-4">
-      <div className="relative -outline-offset-1 flex h-[200px] w-full items-center justify-center overflow-hidden rounded-lg outline outline-white/10">
+      <div className="relative -outline-offset-1 flex h-[200px] w-full items-center justify-center overflow-hidden rounded-lg outline outline-gray-200">
         <img
           src={post.image || "/placeholder.svg"}
           alt={post.title}
           className="h-full w-full select-none object-cover"
         />
         <div className="absolute left-3 top-3 flex items-center gap-2">
-          <span className="rounded-full bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-semibold text-neutral-900 shadow-sm">
+          <span className="rounded-full bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-semibold text-gray-900 shadow-sm">
             {post.category}
           </span>
         </div>
         <div className="absolute right-3 top-3">
-          <span className="rounded-full bg-neutral-900/80 backdrop-blur-sm px-2.5 py-1 text-xs font-medium text-white shadow-sm border border-white/10">
+          <span className="rounded-full bg-gray-900/80 backdrop-blur-sm px-2.5 py-1 text-xs font-medium text-white shadow-sm border border-gray-700">
             {post.readTime}
           </span>
         </div>
       </div>
       <div className="flex w-full items-center justify-between gap-2 px-3 pb-6">
         <div className="flex min-w-0 flex-1 flex-col">
-          <span className="truncate font-semibold text-white">{post.title}</span>
-          <span className="text-sm text-neutral-400">{post.description}</span>
+          <span className="truncate font-semibold text-gray-900">{post.title}</span>
+          <span className="text-sm text-gray-500">{post.description}</span>
         </div>
         <button
           onClick={onReadClick}
-          className="flex h-10 shrink-0 cursor-pointer select-none items-center gap-0.5 rounded-full bg-white/90 backdrop-blur-sm pl-4 pr-3 text-sm font-medium text-neutral-900 transition-transform hover:scale-105 active:scale-95 shadow-md"
+          className="flex h-10 shrink-0 cursor-pointer select-none items-center gap-0.5 rounded-full bg-gray-900 backdrop-blur-sm pl-4 pr-3 text-sm font-medium text-white transition-transform hover:scale-105 active:scale-95 shadow-md"
         >
           Read
           <svg
@@ -466,10 +466,10 @@ function AnimatedCard({
         x: "-50%",
         bottom: 0,
       }}
-      className="absolute flex h-[280px] w-[324px] items-center justify-center overflow-hidden rounded-t-xl border-x border-t border-white/10 bg-neutral-900/80 backdrop-blur-xl p-1 shadow-2xl shadow-black/50 will-change-transform sm:w-[512px]"
+      className="absolute flex h-[280px] w-[324px] items-center justify-center overflow-hidden rounded-t-xl border-x border-t border-gray-200 bg-white/90 backdrop-blur-xl p-1 shadow-xl will-change-transform sm:w-[512px]"
     >
       {/* Inner glow effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 to-transparent pointer-events-none"></div>
       <div className="relative z-10 w-full h-full">
         <CardContent contentType={card.contentType} onReadClick={onReadClick} />
       </div>
@@ -517,9 +517,9 @@ export default function BlogCardStack() {
         <div className="relative z-10 flex w-full items-center justify-center py-4">
           <button
             onClick={handleAnimate}
-            className="relative flex h-9 cursor-pointer select-none items-center justify-center gap-1 overflow-hidden rounded-lg border border-white/10 bg-neutral-900/60 backdrop-blur-md px-4 font-medium text-white transition-all hover:bg-neutral-800/70 active:scale-[0.98] shadow-lg"
+            className="relative flex h-9 cursor-pointer select-none items-center justify-center gap-1 overflow-hidden rounded-lg border border-gray-200 bg-white/80 backdrop-blur-md px-4 font-medium text-gray-700 transition-all hover:bg-gray-50 active:scale-[0.98] shadow-md"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 to-transparent pointer-events-none"></div>
             <span className="relative z-10">Next Article</span>
           </button>
         </div>

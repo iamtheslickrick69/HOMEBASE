@@ -221,7 +221,7 @@ export default function HomePage() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 py-4 px-6">
         <div className="max-w-3xl mx-auto">
-          <div className="flex items-center justify-between bg-neutral-900/95 backdrop-blur-md rounded-2xl px-4 py-3 border border-neutral-700/50">
+          <div className="flex items-center justify-between bg-white/95 backdrop-blur-md rounded-2xl px-4 py-3 border border-gray-200 shadow-sm">
             {/* Logo */}
             <Link href="/" className="flex items-center">
               <Image
@@ -238,19 +238,19 @@ export default function HomePage() {
             <nav className="hidden md:flex items-center gap-1">
               <button
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="px-5 py-2 rounded-xl bg-white text-slate-900 font-medium text-sm transition-all"
+                className="px-5 py-2 rounded-xl bg-gray-900 text-white font-medium text-sm transition-all"
               >
                 Home
               </button>
               <button
                 onClick={() => scrollToSection("features")}
-                className="px-5 py-2 rounded-xl text-neutral-300 hover:text-white font-medium text-sm transition-all hover:bg-neutral-700/50"
+                className="px-5 py-2 rounded-xl text-gray-600 hover:text-gray-900 font-medium text-sm transition-all hover:bg-gray-100"
               >
                 Features
               </button>
               <button
                 onClick={() => scrollToSection("why-homebase")}
-                className="px-5 py-2 rounded-xl text-neutral-300 hover:text-white font-medium text-sm transition-all hover:bg-neutral-700/50"
+                className="px-5 py-2 rounded-xl text-gray-600 hover:text-gray-900 font-medium text-sm transition-all hover:bg-gray-100"
               >
                 About
               </button>
@@ -259,12 +259,12 @@ export default function HomePage() {
             {/* CTA Buttons */}
             <div className="flex items-center gap-3">
               <Link href="/auth/clinic-login">
-                <Button variant="ghost" className="text-neutral-300 hover:text-white hover:bg-neutral-700/50 px-4 font-medium text-sm">
+                <Button variant="ghost" className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 px-4 font-medium text-sm">
                   Sign In
                 </Button>
               </Link>
               <Link href="/auth/clinic-register">
-                <Button className="bg-white hover:bg-slate-100 text-slate-900 rounded-xl px-5 font-medium text-sm">
+                <Button className="bg-gray-900 hover:bg-gray-800 text-white rounded-xl px-5 font-medium text-sm">
                   Get Started
                 </Button>
               </Link>
@@ -277,14 +277,14 @@ export default function HomePage() {
       <section className="min-h-screen flex flex-col justify-center items-center px-4 pt-24 pb-8">
         <div className="text-center max-w-5xl mx-auto mb-8">
           {/* Main headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extralight text-white mb-5 leading-[1.1] tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extralight text-gray-900 mb-5 leading-[1.1] tracking-tight">
             <span className="word-animate" data-delay="200">#1 AI Powered Solution</span>
             <br />
-            <span className="word-animate text-neutral-300" data-delay="500">for Healthcare</span>
+            <span className="word-animate text-gray-500" data-delay="500">for Healthcare</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="word-animate text-base sm:text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto leading-relaxed font-light" data-delay="800">
+          <p className="word-animate text-base sm:text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed font-light" data-delay="800">
             Empowering clinics and patients to safely store their personal data and accurately understand it.
           </p>
 
@@ -295,22 +295,22 @@ export default function HomePage() {
           className="w-full max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10"
           style={{ opacity: 0, animation: 'word-appear 0.8s ease-out forwards', animationDelay: '1.2s' }}
         >
-          {/* Left Card: Member Login - Pure Liquid Glass */}
-          <div className="relative p-6 bg-neutral-900/60 backdrop-blur-xl flex flex-col rounded-xl shadow-2xl shadow-black/50">
+          {/* Left Card: Member Login - Light Glass */}
+          <div className="relative p-6 bg-white/80 backdrop-blur-xl flex flex-col rounded-xl shadow-xl border border-gray-200">
             {/* Inner glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none rounded-xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 to-transparent pointer-events-none rounded-xl"></div>
 
             {/* Horizontal Header Row */}
             <div className="flex items-center justify-between mb-3 relative z-10">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-neutral-800/80 backdrop-blur-sm flex items-center justify-center border border-white/5">
-                  <User className="w-4 h-4 text-neutral-400" strokeWidth={1.5} />
+                <div className="w-9 h-9 rounded-xl bg-gray-100 backdrop-blur-sm flex items-center justify-center border border-gray-200">
+                  <User className="w-4 h-4 text-gray-600" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-sm font-semibold text-white">Member Login</h3>
+                <h3 className="text-sm font-semibold text-gray-900">Member Login</h3>
               </div>
-              <span className="text-[10px] px-2 py-1 rounded-full font-medium bg-neutral-800/80 backdrop-blur-sm text-neutral-400 border border-white/5">Secure</span>
+              <span className="text-[10px] px-2 py-1 rounded-full font-medium bg-gray-100 backdrop-blur-sm text-gray-600 border border-gray-200">Secure</span>
             </div>
-            <p className="text-neutral-500 text-xs mb-4 leading-relaxed relative z-10">
+            <p className="text-gray-500 text-xs mb-4 leading-relaxed relative z-10">
               Access your dashboard based on your role.
             </p>
             <div className="relative z-10 flex-1">
@@ -318,68 +318,68 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Right Card: Start Your Clinic - Liquid Glass */}
-          <div className="relative p-6 bg-neutral-900/60 backdrop-blur-xl flex flex-col rounded-xl shadow-2xl shadow-black/50">
+          {/* Right Card: Start Your Clinic - Light Glass */}
+          <div className="relative p-6 bg-white/80 backdrop-blur-xl flex flex-col rounded-xl shadow-xl border border-gray-200">
             {/* Inner glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-transparent pointer-events-none rounded-xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 via-transparent to-transparent pointer-events-none rounded-xl"></div>
 
             {/* Horizontal Header Row */}
             <div className="flex items-center justify-between mb-3 relative z-10">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-neutral-800/70 backdrop-blur-sm flex items-center justify-center border border-neutral-700/50">
-                  <Zap className="w-4 h-4 text-neutral-300" strokeWidth={1.5} />
+                <div className="w-9 h-9 rounded-xl bg-gray-100 backdrop-blur-sm flex items-center justify-center border border-gray-200">
+                  <Zap className="w-4 h-4 text-gray-700" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-sm font-semibold text-white">Start Your Clinic</h3>
+                <h3 className="text-sm font-semibold text-gray-900">Start Your Clinic</h3>
               </div>
-              <span className="text-[10px] px-2 py-1 rounded-full font-medium bg-neutral-800/70 backdrop-blur-sm text-neutral-300 border border-neutral-700/50">Free Trial</span>
+              <span className="text-[10px] px-2 py-1 rounded-full font-medium bg-gray-100 backdrop-blur-sm text-gray-700 border border-gray-200">Free Trial</span>
             </div>
-            <p className="text-neutral-400 text-xs mb-4 leading-relaxed relative z-10">
+            <p className="text-gray-500 text-xs mb-4 leading-relaxed relative z-10">
               The only peptide therapy EHR with built-in AI intelligence.
             </p>
 
             {/* Trust Badges - 2x2 Grid */}
             <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4 relative z-10">
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-neutral-400" strokeWidth={2} />
-                <span className="text-xs text-neutral-300">HIPAA Compliant</span>
+                <CheckCircle2 className="h-3.5 w-3.5 text-green-600" strokeWidth={2} />
+                <span className="text-xs text-gray-700">HIPAA Compliant</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-neutral-400" strokeWidth={2} />
-                <span className="text-xs text-neutral-300">70+ Protocols</span>
+                <CheckCircle2 className="h-3.5 w-3.5 text-green-600" strokeWidth={2} />
+                <span className="text-xs text-gray-700">70+ Protocols</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-neutral-400" strokeWidth={2} />
-                <span className="text-xs text-neutral-300">AI-Powered</span>
+                <CheckCircle2 className="h-3.5 w-3.5 text-green-600" strokeWidth={2} />
+                <span className="text-xs text-gray-700">AI-Powered</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-neutral-400" strokeWidth={2} />
-                <span className="text-xs text-neutral-300">14-Day Free Trial</span>
+                <CheckCircle2 className="h-3.5 w-3.5 text-green-600" strokeWidth={2} />
+                <span className="text-xs text-gray-700">14-Day Free Trial</span>
               </div>
             </div>
 
             {/* What's Included */}
-            <div className="border-t border-dashed border-neutral-700 pt-4 mb-4 relative z-10">
-              <p className="text-[10px] uppercase tracking-wider text-neutral-500 mb-2">Includes</p>
+            <div className="border-t border-dashed border-gray-300 pt-4 mb-4 relative z-10">
+              <p className="text-[10px] uppercase tracking-wider text-gray-500 mb-2">Includes</p>
               <div className="flex flex-wrap gap-1.5">
-                <span className="text-[10px] px-2 py-1 rounded bg-neutral-800/80 text-neutral-400">Provider Portal</span>
-                <span className="text-[10px] px-2 py-1 rounded bg-neutral-800/80 text-neutral-400">Patient App</span>
-                <span className="text-[10px] px-2 py-1 rounded bg-neutral-800/80 text-neutral-400">Analytics</span>
-                <span className="text-[10px] px-2 py-1 rounded bg-neutral-800/80 text-neutral-400">Dosing Calculator</span>
-                <span className="text-[10px] px-2 py-1 rounded bg-neutral-800/80 text-neutral-400">Product Store</span>
+                <span className="text-[10px] px-2 py-1 rounded bg-gray-100 text-gray-600">Provider Portal</span>
+                <span className="text-[10px] px-2 py-1 rounded bg-gray-100 text-gray-600">Patient App</span>
+                <span className="text-[10px] px-2 py-1 rounded bg-gray-100 text-gray-600">Analytics</span>
+                <span className="text-[10px] px-2 py-1 rounded bg-gray-100 text-gray-600">Dosing Calculator</span>
+                <span className="text-[10px] px-2 py-1 rounded bg-gray-100 text-gray-600">Product Store</span>
               </div>
             </div>
 
             {/* CTA Buttons */}
             <div className="flex gap-2 mt-auto relative z-10">
               <Link href="/auth/clinic-register" className="flex-1">
-                <Button size="default" className="w-full bg-white hover:bg-neutral-100 text-black rounded-lg shadow-lg transition-all">
+                <Button size="default" className="w-full bg-gray-900 hover:bg-gray-800 text-white rounded-lg shadow-lg transition-all">
                   Get Started
                   <ArrowRight className="ml-2 h-4 w-4" strokeWidth={2} />
                 </Button>
               </Link>
               <button
                 onClick={() => scrollToSection("features")}
-                className="px-3 text-neutral-500 text-xs font-medium hover:text-white transition-colors"
+                className="px-3 text-gray-500 text-xs font-medium hover:text-gray-900 transition-colors"
               >
                 Learn More
               </button>
@@ -390,18 +390,18 @@ export default function HomePage() {
         {/* Scroll indicator */}
         <button
           onClick={() => scrollToSection("atlas-section")}
-          className="text-neutral-500 hover:text-neutral-300 transition-colors animate-bounce"
+          className="text-gray-400 hover:text-gray-600 transition-colors animate-bounce"
         >
           <ChevronDown className="h-8 w-8" strokeWidth={1.5} />
         </button>
       </section>
 
       {/* Atlas AI Section - Hero Globe Background */}
-      <section id="atlas-section" className="py-24 px-4 relative overflow-hidden min-h-[900px] flex items-center">
+      <section id="atlas-section" className="py-24 px-4 relative overflow-hidden min-h-[900px] flex items-center bg-gray-50">
         {/* Gradient Wave Background - Behind everything */}
         <GradientWave
-          colors={["#38bdf8", "#ffffff", "#38bdf8", "#ffffff", "#38bdf8", "#ffffff"]}
-          className="opacity-50"
+          colors={["#e0f2fe", "#ffffff", "#e0f2fe", "#ffffff", "#e0f2fe", "#ffffff"]}
+          className="opacity-30"
           noiseSpeed={0.00001}
           shadowPower={5}
           darkenTop={false}
@@ -409,28 +409,28 @@ export default function HomePage() {
 
         {/* MASSIVE Globe Background */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-          <div className="opacity-15">
+          <div className="opacity-10">
             <RotatingEarth width={700} height={700} className="w-[700px] h-[700px]" />
           </div>
         </div>
 
         {/* Subtle ambient glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02)_0%,transparent_70%)] z-20 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.02)_0%,transparent_70%)] z-20 pointer-events-none"></div>
 
         <div className="container mx-auto max-w-4xl relative z-30">
           {/* Header - Centered */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-800/70 border border-neutral-700/50 mb-4 backdrop-blur-sm">
-              <Sparkles className="h-4 w-4 text-neutral-300" strokeWidth={1.5} />
-              <span className="text-sm font-medium text-neutral-300">Introducing Atlas AI</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-gray-200 mb-4 backdrop-blur-sm shadow-sm">
+              <Sparkles className="h-4 w-4 text-gray-700" strokeWidth={1.5} />
+              <span className="text-sm font-medium text-gray-700">Introducing Atlas AI</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-extralight text-white mb-2 tracking-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+            <h2 className="text-4xl md:text-5xl font-extralight text-gray-900 mb-2 tracking-tight">
               Intelligence That's Yours
             </h2>
-            <p className="text-neutral-300 text-lg font-medium mb-3 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            <p className="text-gray-700 text-lg font-medium mb-3">
               Map out your health
             </p>
-            <p className="text-neutral-400 text-base max-w-xl mx-auto font-light drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            <p className="text-gray-500 text-base max-w-xl mx-auto font-light">
               Powered by your data. Protected by design. Perfected for you.
             </p>
           </div>
@@ -452,16 +452,16 @@ export default function HomePage() {
                   onClick={() => setAtlasActiveIndex(index)}
                   className={`group relative w-14 h-14 rounded-xl border transition-all duration-200 backdrop-blur-md ${
                     isActive
-                      ? 'bg-white/20 border-white/60 scale-110 shadow-lg shadow-white/25'
-                      : 'bg-neutral-900/60 border-neutral-700 hover:border-neutral-500 hover:scale-105'
+                      ? 'bg-gray-900 border-gray-900 scale-110 shadow-lg'
+                      : 'bg-white/80 border-gray-200 hover:border-gray-400 hover:scale-105'
                   }`}
                   title={feature.title}
                 >
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <Icon className={`w-6 h-6 ${isActive ? 'text-white' : 'text-neutral-400'}`} strokeWidth={1.5} />
+                    <Icon className={`w-6 h-6 ${isActive ? 'text-white' : 'text-gray-600'}`} strokeWidth={1.5} />
                   </div>
                   <span className={`absolute -top-1 -right-1 w-5 h-5 rounded-full text-xs font-bold flex items-center justify-center ${
-                    isActive ? 'bg-white text-black shadow-md' : 'bg-neutral-800 text-neutral-500'
+                    isActive ? 'bg-white text-gray-900 shadow-md' : 'bg-gray-100 text-gray-500'
                   }`}>
                     {index + 1}
                   </span>
@@ -490,13 +490,13 @@ export default function HomePage() {
             ].map((feature, index) => {
               const Icon = feature.icon
               return (
-                <div key={index} className="flex items-center gap-4 px-6 py-5 rounded-xl bg-neutral-900/70 backdrop-blur-md border border-dashed border-neutral-700 max-w-2xl mx-auto shadow-xl">
-                  <div className="w-14 h-14 rounded-xl bg-neutral-800/70 flex items-center justify-center flex-shrink-0 border border-neutral-700/50">
-                    <Icon className="w-7 h-7 text-neutral-300" strokeWidth={1.5} />
+                <div key={index} className="flex items-center gap-4 px-6 py-5 rounded-xl bg-white/90 backdrop-blur-md border border-dashed border-gray-300 max-w-2xl mx-auto shadow-lg">
+                  <div className="w-14 h-14 rounded-xl bg-gray-100 flex items-center justify-center flex-shrink-0 border border-gray-200">
+                    <Icon className="w-7 h-7 text-gray-700" strokeWidth={1.5} />
                   </div>
                   <div>
-                    <h3 className="text-white font-semibold mb-1 text-lg">{feature.title}</h3>
-                    <p className="text-neutral-400 text-sm leading-relaxed">{feature.desc}</p>
+                    <h3 className="text-gray-900 font-semibold mb-1 text-lg">{feature.title}</h3>
+                    <p className="text-gray-500 text-sm leading-relaxed">{feature.desc}</p>
                   </div>
                 </div>
               )
@@ -505,20 +505,20 @@ export default function HomePage() {
 
           {/* Stats - Glass Morphism Badges */}
           <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
-            <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-neutral-900/70 backdrop-blur-md border border-neutral-800 shadow-lg">
-              <Lock className="w-4 h-4 text-neutral-300" strokeWidth={1.5} />
-              <div className="text-2xl font-bold text-white">100%</div>
-              <div className="text-xs text-neutral-400">Data Ownership</div>
+            <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white/90 backdrop-blur-md border border-gray-200 shadow-md">
+              <Lock className="w-4 h-4 text-gray-700" strokeWidth={1.5} />
+              <div className="text-2xl font-bold text-gray-900">100%</div>
+              <div className="text-xs text-gray-500">Data Ownership</div>
             </div>
-            <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-neutral-900/70 backdrop-blur-md border border-neutral-800 shadow-lg">
-              <Shield className="w-4 h-4 text-neutral-300" strokeWidth={1.5} />
-              <div className="text-2xl font-bold text-white">0</div>
-              <div className="text-xs text-neutral-400">Third-Party Sharing</div>
+            <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white/90 backdrop-blur-md border border-gray-200 shadow-md">
+              <Shield className="w-4 h-4 text-gray-700" strokeWidth={1.5} />
+              <div className="text-2xl font-bold text-gray-900">0</div>
+              <div className="text-xs text-gray-500">Third-Party Sharing</div>
             </div>
-            <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-neutral-900/70 backdrop-blur-md border border-neutral-800 shadow-lg">
-              <Lock className="w-4 h-4 text-neutral-300" strokeWidth={1.5} />
-              <div className="text-2xl font-bold text-white">256-bit</div>
-              <div className="text-xs text-neutral-400">Encryption + HIPAA++</div>
+            <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white/90 backdrop-blur-md border border-gray-200 shadow-md">
+              <Lock className="w-4 h-4 text-gray-700" strokeWidth={1.5} />
+              <div className="text-2xl font-bold text-gray-900">256-bit</div>
+              <div className="text-xs text-gray-500">Encryption + HIPAA++</div>
             </div>
           </div>
 
@@ -526,7 +526,7 @@ export default function HomePage() {
           <div className="text-center">
             <button
               onClick={() => window.dispatchEvent(new CustomEvent("open-chat-widget"))}
-              className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white hover:bg-neutral-100 text-black font-semibold transition-all hover:scale-105 shadow-xl"
+              className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gray-900 hover:bg-gray-800 text-white font-semibold transition-all hover:scale-105 shadow-xl"
             >
               <span className="relative">Experience Atlas AI</span>
               <ArrowRight className="relative w-4 h-4 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
@@ -535,30 +535,30 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features Section - Dark Theme with Liquid Glass */}
-      <section id="features" className="py-24 px-4 bg-neutral-950 relative overflow-hidden">
+      {/* Features Section - Light Theme */}
+      <section id="features" className="py-24 px-4 bg-white relative overflow-hidden">
         {/* Subtle ambient glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(100,100,100,0.03)_0%,transparent_60%)] pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(0,0,0,0.02)_0%,transparent_60%)] pointer-events-none"></div>
         <div className="container mx-auto max-w-5xl relative z-10">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
               Powerful tools for every role.
             </h2>
-            <p className="text-neutral-400 max-w-2xl mx-auto font-light mb-8">
+            <p className="text-gray-500 max-w-2xl mx-auto font-light mb-8">
               One platform with tailored experiences for clinic admins, providers, and patients.
             </p>
 
-            {/* Filter Buttons - Dark Glass */}
+            {/* Filter Buttons - Light Glass */}
             <div className="flex items-center justify-center">
-              <div className="inline-flex items-center bg-neutral-900/60 backdrop-blur-md rounded-2xl p-1.5 gap-1 border border-neutral-700/50">
+              <div className="inline-flex items-center bg-gray-100/80 backdrop-blur-md rounded-2xl p-1.5 gap-1 border border-gray-200">
                 {(["all", "admin", "provider", "patient"] as RoleFilter[]).map((filter) => (
                   <button
                     key={filter}
                     onClick={() => handleFilterChange(filter)}
                     className={`px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 ${
                       activeFilter === filter
-                        ? "bg-neutral-800 text-white shadow-md"
-                        : "text-neutral-400 hover:text-white hover:bg-neutral-800/50"
+                        ? "bg-white text-gray-900 shadow-md"
+                        : "text-gray-500 hover:text-gray-900 hover:bg-white/50"
                     }`}
                   >
                     {filter === "all" ? "All Features" : roleLabels[filter]}
@@ -568,9 +568,9 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Animated Cards Grid - Liquid Glass */}
+          {/* Animated Cards Grid - Light Glass */}
           <div
-            className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 divide-x divide-y divide-dashed divide-neutral-700/50 border border-dashed border-neutral-700/50 rounded-xl overflow-hidden transition-all duration-200 ${
+            className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 divide-x divide-y divide-dashed divide-gray-200 border border-dashed border-gray-200 rounded-xl overflow-hidden transition-all duration-200 ${
               isAnimating ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
             }`}
           >
@@ -582,7 +582,7 @@ export default function HomePage() {
                     key={`${role}-${index}`}
                     feature={feature}
                     patternSeed={roleIndex * 10 + index}
-                    className="bg-neutral-900/40 backdrop-blur-sm hover:bg-neutral-900/60 transition-colors"
+                    className="bg-white/80 backdrop-blur-sm hover:bg-gray-50 transition-colors"
                   />
                 ))
               )
@@ -593,7 +593,7 @@ export default function HomePage() {
                   key={index}
                   feature={feature}
                   patternSeed={index}
-                  className="bg-neutral-900/40 backdrop-blur-sm hover:bg-neutral-900/60 transition-colors"
+                  className="bg-white/80 backdrop-blur-sm hover:bg-gray-50 transition-colors"
                 />
               ))
             )}
@@ -602,18 +602,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Homebase Section - Dark Theme with Liquid Glass */}
-      <section id="why-homebase" className="py-24 px-4 bg-neutral-950 relative overflow-hidden">
+      {/* Why Homebase Section - Light Theme */}
+      <section id="why-homebase" className="py-24 px-4 bg-gray-50 relative overflow-hidden">
         {/* Subtle ambient glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.01)_0%,transparent_50%)] pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(0,0,0,0.02)_0%,transparent_50%)] pointer-events-none"></div>
         <div className="container mx-auto max-w-5xl relative z-10">
           {/* Centered Headline */}
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
               Built for the future of
-              <span className="text-neutral-300 font-medium"> functional medicine.</span>
+              <span className="text-gray-500 font-medium"> functional medicine.</span>
             </h2>
-            <p className="text-neutral-400 max-w-2xl mx-auto font-light">
+            <p className="text-gray-500 max-w-2xl mx-auto font-light">
               The only EHR platform designed specifically for peptide therapy clinics.
             </p>
           </div>
@@ -658,31 +658,31 @@ export default function HomePage() {
                 <div
                   key={index}
                   className={`relative border rounded-xl overflow-hidden transition-all duration-300 backdrop-blur-sm ${
-                    isPriority && !isOpen ? "border-white/30 bg-white/10 shadow-lg shadow-white/10" :
-                    isOpen ? "border-neutral-600 bg-neutral-900/60" : "border-neutral-700/50 bg-neutral-900/40 hover:border-neutral-600 hover:bg-neutral-900/60"
+                    isPriority && !isOpen ? "border-gray-400 bg-white shadow-lg" :
+                    isOpen ? "border-gray-300 bg-white" : "border-gray-200 bg-white/80 hover:border-gray-300 hover:bg-white"
                   }`}
                 >
                   {/* Inner glow for priority */}
                   {isPriority && !isOpen && (
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-gray-100/50 to-transparent pointer-events-none"></div>
                   )}
                   <button
                     onClick={() => setOpenAccordion(isOpen ? null : index)}
                     className="w-full px-6 py-4 flex items-center justify-between gap-4 text-left relative z-10"
                   >
                     <div className="flex items-center gap-4">
-                      <div className={`flex-shrink-0 rounded-xl flex items-center justify-center backdrop-blur-sm bg-gray-500/20 text-gray-300 ${
+                      <div className={`flex-shrink-0 rounded-xl flex items-center justify-center backdrop-blur-sm bg-gray-100 text-gray-700 ${
                         isPriority ? "w-14 h-14" : "w-12 h-12"
                       }`}>
                         <Icon className={isPriority ? "w-7 h-7" : "w-6 h-6"} strokeWidth={1.5} />
                       </div>
-                      <span className="font-semibold text-white">{feature.title}</span>
+                      <span className="font-semibold text-gray-900">{feature.title}</span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className="text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm bg-gray-500/20 text-gray-300 border border-gray-500/30">
+                      <span className="text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm bg-gray-100 text-gray-700 border border-gray-200">
                         {feature.badge}
                       </span>
-                      <ChevronDown className={`w-5 h-5 text-neutral-400 transition-transform duration-300 ${
+                      <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${
                         isOpen ? "rotate-180" : ""
                       }`} />
                     </div>
@@ -690,7 +690,7 @@ export default function HomePage() {
                   <div className={`overflow-hidden transition-all duration-300 ${
                     isOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
                   }`}>
-                    <div className="px-6 pb-5 text-neutral-400 leading-relaxed text-sm whitespace-pre-line relative z-10">
+                    <div className="px-6 pb-5 text-gray-500 leading-relaxed text-sm whitespace-pre-line relative z-10">
                       {feature.description}
                     </div>
                   </div>
@@ -701,14 +701,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Blog Section - Dark Theme with Liquid Glass Cards */}
-      <section id="insights" className="py-24 px-4 bg-neutral-950">
+      {/* Blog Section - Light Theme */}
+      <section id="insights" className="py-24 px-4 bg-white">
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-8">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
               Insights for peptide clinics.
             </h2>
-            <p className="text-neutral-400 max-w-2xl mx-auto font-light">
+            <p className="text-gray-500 max-w-2xl mx-auto font-light">
               Stay ahead with the latest on compliance, patient care, and practice growth.
             </p>
           </div>
@@ -717,26 +717,26 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-4 bg-neutral-950">
+      <section className="py-24 px-4 bg-gray-50">
         <div className="container mx-auto max-w-4xl">
-          <div className="bg-gradient-to-br from-neutral-900/60 to-neutral-900/40 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-neutral-700/50 text-center relative overflow-hidden shadow-2xl">
-            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none"></div>
+          <div className="bg-white backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-gray-200 text-center relative overflow-hidden shadow-xl">
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 to-transparent pointer-events-none"></div>
             <div className="relative z-10">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight text-white mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight text-gray-900 mb-4">
                 Ready to transform your practice?
               </h2>
-              <p className="text-neutral-400 mb-8 max-w-lg mx-auto font-light">
+              <p className="text-gray-500 mb-8 max-w-lg mx-auto font-light">
                 Join the growing number of dental practices using Homebase to eliminate password chaos, centralize 2FA codes, and secure their team's access.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link href="/auth/clinic-register">
-                  <Button size="lg" className="bg-white hover:bg-neutral-100 text-black px-8">
+                  <Button size="lg" className="bg-gray-900 hover:bg-gray-800 text-white px-8">
                     Register Your Clinic
                     <ArrowRight className="ml-2 h-5 w-5" strokeWidth={1.5} />
                   </Button>
                 </Link>
                 <a href="mailto:hello@homebase.dental?subject=Schedule%20a%20Demo%20-%20Homebase&body=Hi%2C%0A%0AI%27d%20like%20to%20schedule%20a%20demo%20of%20Homebase%20for%20my%20practice.%0A%0AName%3A%0APractice%20Name%3A%0APhone%3A%0A%0AThank%20you!">
-                  <Button size="lg" variant="outline" className="bg-transparent border-white/30 text-white hover:bg-white/10 hover:border-white/50 px-8">
+                  <Button size="lg" variant="outline" className="bg-transparent border-gray-300 text-gray-700 hover:bg-gray-100 hover:border-gray-400 px-8">
                     Schedule Demo
                   </Button>
                 </a>
@@ -747,7 +747,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-4 border-t border-neutral-800">
+      <footer className="py-12 px-4 border-t border-gray-200 bg-white">
         <div className="container mx-auto max-w-6xl">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4">
@@ -759,16 +759,16 @@ export default function HomePage() {
                 className="h-7 w-auto opacity-70"
               />
             </div>
-            <div className="flex items-center gap-6 text-sm text-neutral-500">
+            <div className="flex items-center gap-6 text-sm text-gray-500">
               <span>One login. Every portal.</span>
             </div>
-            <div className="flex items-center gap-6 text-sm text-neutral-500">
-              <Link href="#" className="hover:text-neutral-300 transition-colors">Privacy</Link>
-              <Link href="#" className="hover:text-neutral-300 transition-colors">Terms</Link>
-              <Link href="#" className="hover:text-neutral-300 transition-colors">Contact</Link>
+            <div className="flex items-center gap-6 text-sm text-gray-500">
+              <Link href="#" className="hover:text-gray-700 transition-colors">Privacy</Link>
+              <Link href="#" className="hover:text-gray-700 transition-colors">Terms</Link>
+              <Link href="#" className="hover:text-gray-700 transition-colors">Contact</Link>
             </div>
           </div>
-          <div className="mt-8 pt-8 border-t border-neutral-800 text-center text-sm text-neutral-600">
+          <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm text-gray-400">
             &copy; {new Date().getFullYear()} Homebase. All rights reserved.
           </div>
         </div>
