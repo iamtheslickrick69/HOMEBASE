@@ -1,8 +1,8 @@
-# CLAUDE.md - Bridge MDX Development Guide
+# CLAUDE.md - PRESTON Development Guide
 
 ## Project Overview
 
-**Bridge MDX** is a specialized Electronic Health Records (EHR) SaaS platform for peptide therapy clinics. It's a three-sided marketplace connecting:
+**PRESTON** is a specialized Electronic Health Records (EHR) SaaS platform for peptide therapy clinics. It's a three-sided marketplace connecting:
 
 1. **Clinic Admins** - Manage providers, patients, billing, analytics
 2. **Providers** - Nurse Practitioners, PAs, Chiropractors managing patient treatments
@@ -13,8 +13,8 @@
 ## Quick Start
 
 ```bash
-git clone https://github.com/iamtheslickrick69/bridge-mdx.git
-cd bridge-mdx
+git clone https://github.com/iamtheslickrick69/preston.git
+cd preston
 npm install --legacy-peer-deps
 npm run dev
 # Open http://localhost:3000
@@ -51,7 +51,7 @@ The application is a **frontend-only prototype** built with:
 ## Directory Structure
 
 ```
-bridge-mdx/
+preston/
 ├── app/                          # Next.js App Router pages
 │   ├── auth/                     # Login/register pages
 │   │   ├── clinic-login/

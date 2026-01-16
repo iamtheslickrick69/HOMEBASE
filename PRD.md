@@ -1,4 +1,4 @@
-# Bridge MDX - Product Requirements Document (PRD)
+# PRESTON - Product Requirements Document (PRD)
 
 **Version:** 1.0.0
 **Last Updated:** December 2024
@@ -38,7 +38,7 @@
 
 ## Executive Summary
 
-Bridge MDX is a comprehensive, HIPAA-compliant, cash-pay Electronic Health Record (EHR) and practice management platform specifically designed for functional medicine clinics, wellness centers, aesthetic clinics, med spas, IV therapy clinics, and similar cash-pay healthcare providers.
+PRESTON is a comprehensive, HIPAA-compliant, cash-pay Electronic Health Record (EHR) and practice management platform specifically designed for functional medicine clinics, wellness centers, aesthetic clinics, med spas, IV therapy clinics, and similar cash-pay healthcare providers.
 
 ### Core Differentiator
 
@@ -73,7 +73,7 @@ At Scale:
 
 ## Project Identity
 
-**Project Name:** Bridge MDX
+**Project Name:** PRESTON
 **Tagline:** "Functional Medicine Optimized — Charts-on-the-go!"
 
 **Description:** Comprehensive software solution designed for molecular intelligence & data to power functional health decisions.
@@ -112,7 +112,7 @@ Replace fragmented clinic workflows with an all-in-one platform combining EHR, p
 
 ### Feature Matrix
 
-| Feature | Cerbo | OptiMantra | Practice Better | CharmHealth | PatientNow | **Bridge MDX** |
+| Feature | Cerbo | OptiMantra | Practice Better | CharmHealth | PatientNow | **PRESTON** |
 |---------|-------|------------|-----------------|-------------|------------|----------------|
 | Cash-Pay Focus | ✓ | ✓ | ✓ | Partial | ✓ | ✓ |
 | Functional Med Charting | ✓ | ✓ | ✓ | Partial | Limited | ✓ |
@@ -150,7 +150,7 @@ Cloud-based, HIPAA-compliant SaaS platform with:
 ### Four User Portals
 
 ```
-Bridge MDX Platform
+PRESTON Platform
 ├── Clinic Admin Portal (Practice owners, office managers)
 ├── Provider Portal (MDs, NPs, PAs, DCs, RNs, MAs)
 ├── Patient Portal (Patients/clients)
@@ -689,7 +689,7 @@ Clinical Note Structure
 
 ### The Legal Innovation
 
-Bridge MDX eliminates provider liability through a unique transaction structure where:
+PRESTON eliminates provider liability through a unique transaction structure where:
 - Patient purchases **directly from the lab/manufacturer**
 - Software fee model **replaces traditional product markup**
 - **Eliminates perception** of reselling RUO products for profit
@@ -808,7 +808,7 @@ Revenue Split:
 └── Shipping Fees: 5% ($3,650)
 ```
 
-### Bridge MDX Revenue Model
+### PRESTON Revenue Model
 
 ```
 Per Clinic Monthly Revenue:
