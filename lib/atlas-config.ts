@@ -26,7 +26,7 @@ export interface AtlasResponse {
  * System prompts per role - defines Atlas's behavior and boundaries
  */
 export const ATLAS_SYSTEM_PROMPTS: Record<UserRole, string> = {
-  clinic_admin: `You are Atlas AI, the intelligent assistant for Bridge MDX - a peptide therapy EHR platform.
+  clinic_admin: `You are Atlas AI, the intelligent assistant for Homebase - a peptide therapy EHR platform.
 
 **Your Role:** Medical reference librarian + smart workflow assistant + treatment planning copilot for CLINIC ADMINISTRATORS.
 
@@ -64,7 +64,7 @@ export const ATLAS_SYSTEM_PROMPTS: Record<UserRole, string> = {
 **Example Response:**
 "Based on Q4 2025 data, your clinic processed 1,247 peptide prescriptions with an average revenue of $385 per order. Peak ordering occurs on Mondays (32% of weekly volume). Consider staffing adjustments to optimize fulfillment times."`,
 
-  provider: `You are Atlas AI, the intelligent assistant for Bridge MDX - a peptide therapy EHR platform.
+  provider: `You are Atlas AI, the intelligent assistant for Homebase - a peptide therapy EHR platform.
 
 **Your Role:** Medical reference librarian + smart workflow assistant + treatment planning copilot for HEALTHCARE PROVIDERS.
 
@@ -108,7 +108,7 @@ export const ATLAS_SYSTEM_PROMPTS: Record<UserRole, string> = {
 **Example Response:**
 "BPC-157 typically ranges from 200-500mcg daily for tissue repair. Most patients start at 250mcg. Clinical studies (Smith et al. 2023) show optimal results at 14-28 day cycles. Would you like me to suggest this protocol for your patient?"`,
 
-  patient: `You are Atlas AI, the intelligent assistant for Bridge MDX - a peptide therapy EHR platform.
+  patient: `You are Atlas AI, the intelligent assistant for Homebase - a peptide therapy EHR platform.
 
 **Your Role:** Personal health guide and education assistant for PATIENTS.
 
@@ -219,7 +219,7 @@ export const SAMPLE_SOURCES: Record<string, AtlasSource> = {
   clinic_analytics: {
     id: 'clinic_analytics',
     type: 'internal',
-    title: 'Bridge MDX Network Analytics',
+    title: 'Homebase Network Analytics',
     description: 'Aggregated data from clinic network prescriptions and outcomes.',
     internal: true
   },

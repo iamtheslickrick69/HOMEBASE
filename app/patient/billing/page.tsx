@@ -313,8 +313,8 @@ export default function PatientBillingPage() {
                                 {/* Invoice Header */}
                                 <div className="flex justify-between">
                                   <div>
-                                    <h3 className="font-bold text-lg">Bridge MDX</h3>
-                                    <p className="text-sm text-muted-foreground">Peptide Therapy Clinic</p>
+                                    <h3 className="font-bold text-lg">Homebase</h3>
+                                    <p className="text-sm text-muted-foreground">Dental Practice</p>
                                     <p className="text-sm text-muted-foreground">123 Medical Plaza, Suite 100</p>
                                     <p className="text-sm text-muted-foreground">Phoenix, AZ 85001</p>
                                   </div>

@@ -225,8 +225,8 @@ export default function HomePage() {
             {/* Logo */}
             <Link href="/" className="flex items-center">
               <Image
-                src="/bridgeicon.png"
-                alt="Bridge MDX"
+                src="/homebase-logo.png"
+                alt="Homebase"
                 width={240}
                 height={48}
                 className="h-9 md:h-10 w-auto"
@@ -249,7 +249,7 @@ export default function HomePage() {
                 Features
               </button>
               <button
-                onClick={() => scrollToSection("why-bridge")}
+                onClick={() => scrollToSection("why-homebase")}
                 className="px-5 py-2 rounded-xl text-neutral-300 hover:text-white font-medium text-sm transition-all hover:bg-neutral-700/50"
               >
                 About
@@ -602,8 +602,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Bridge MDX Section - Dark Theme with Liquid Glass */}
-      <section id="why-bridge" className="py-24 px-4 bg-neutral-950 relative overflow-hidden">
+      {/* Why Homebase Section - Dark Theme with Liquid Glass */}
+      <section id="why-homebase" className="py-24 px-4 bg-neutral-950 relative overflow-hidden">
         {/* Subtle ambient glow */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.01)_0%,transparent_50%)] pointer-events-none"></div>
         <div className="container mx-auto max-w-5xl relative z-10">
@@ -726,7 +726,7 @@ export default function HomePage() {
                 Ready to transform your practice?
               </h2>
               <p className="text-neutral-400 mb-8 max-w-lg mx-auto font-light">
-                Join the growing number of peptide therapy clinics using Bridge MDX to streamline operations, ensure compliance, and deliver better patient outcomes.
+                Join the growing number of dental practices using Homebase to eliminate password chaos, centralize 2FA codes, and secure their team's access.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link href="/auth/clinic-register">
@@ -735,7 +735,7 @@ export default function HomePage() {
                     <ArrowRight className="ml-2 h-5 w-5" strokeWidth={1.5} />
                   </Button>
                 </Link>
-                <a href="mailto:Preston@bridgemedix.com?subject=Schedule%20a%20Demo%20-%20Bridge%20MDX&body=Hi%20Preston%2C%0A%0AI%27d%20like%20to%20schedule%20a%20demo%20of%20Bridge%20MDX%20for%20my%20clinic.%0A%0AName%3A%0AClinic%20Name%3A%0APhone%3A%0A%0AThank%20you!">
+                <a href="mailto:hello@homebase.dental?subject=Schedule%20a%20Demo%20-%20Homebase&body=Hi%2C%0A%0AI%27d%20like%20to%20schedule%20a%20demo%20of%20Homebase%20for%20my%20practice.%0A%0AName%3A%0APractice%20Name%3A%0APhone%3A%0A%0AThank%20you!">
                   <Button size="lg" variant="outline" className="bg-transparent border-white/30 text-white hover:bg-white/10 hover:border-white/50 px-8">
                     Schedule Demo
                   </Button>
@@ -752,15 +752,15 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               <Image
-                src="/bridgeicon.png"
-                alt="Bridge MDX"
+                src="/homebase-logo.png"
+                alt="Homebase"
                 width={140}
                 height={28}
                 className="h-7 w-auto opacity-70"
               />
             </div>
             <div className="flex items-center gap-6 text-sm text-neutral-500">
-              <span>Molecular Intelligence for Modern Clinics</span>
+              <span>One login. Every portal.</span>
             </div>
             <div className="flex items-center gap-6 text-sm text-neutral-500">
               <Link href="#" className="hover:text-neutral-300 transition-colors">Privacy</Link>
@@ -769,7 +769,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-neutral-800 text-center text-sm text-neutral-600">
-            &copy; {new Date().getFullYear()} Bridge MDX. All rights reserved.
+            &copy; {new Date().getFullYear()} Homebase. All rights reserved.
           </div>
         </div>
       </footer>

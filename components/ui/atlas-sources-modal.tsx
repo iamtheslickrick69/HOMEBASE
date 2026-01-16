@@ -91,7 +91,7 @@ export function AtlasSourcesModal({ open, onOpenChange, sources }: AtlasSourcesM
                     {source.internal && (
                       <p className="text-xs text-violet-400 ml-9 mb-2 flex items-center gap-1">
                         <Database className="h-3 w-3" />
-                        Internal Bridge MDX Data
+                        Internal Homebase Data
                       </p>
                     )}
 

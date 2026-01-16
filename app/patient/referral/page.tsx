@@ -36,7 +36,7 @@ export default function PatientReferralPage() {
   const [personalMessage, setPersonalMessage] = useState("")
 
   const referralCode = "SARAH2024"
-  const referralLink = `https://bridgemdx.com/signup?ref=${referralCode}`
+  const referralLink = `https://homebase.dental/signup?ref=${referralCode}`
 
   const totalReferrals = 4
   const completedReferrals = 3
@@ -54,12 +54,12 @@ export default function PatientReferralPage() {
   }
 
   const handleShare = (platform: string) => {
-    const message = encodeURIComponent(`I've been using Bridge MDX for my peptide therapy and it's been great! Use my referral code ${referralCode} to get $25 off your first order. ${referralLink}`)
+    const message = encodeURIComponent(`I've been using Homebase for my dental practice password management and it's been great! Use my referral code ${referralCode} to get $25 off your first month. ${referralLink}`)
 
     const urls: Record<string, string> = {
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}`,
       twitter: `https://twitter.com/intent/tweet?text=${message}`,
-      email: `mailto:?subject=Try Bridge MDX&body=${message}`,
+      email: `mailto:?subject=Try Homebase&body=${message}`,
     }
 
     if (urls[platform]) {

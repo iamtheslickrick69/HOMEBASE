@@ -204,7 +204,7 @@ export default function PatientOnboardingPage() {
   }
 
   const handleComplete = () => {
-    toast.success("Welcome to Bridge MDX!", {
+    toast.success("Welcome to Homebase!", {
       description: "Your account has been set up successfully.",
     })
     router.push("/patient/dashboard")
@@ -215,7 +215,7 @@ export default function PatientOnboardingPage() {
       <div className="container max-w-4xl mx-auto py-8 px-4">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-2">Welcome to Bridge MDX</h1>
+          <h1 className="text-3xl font-bold mb-2">Welcome to Homebase</h1>
           <p className="text-muted-foreground">
             Let&apos;s get you set up. This should only take a few minutes.
           </p>
@@ -660,7 +660,7 @@ export default function PatientOnboardingPage() {
                           HIPAA Authorization *
                         </Label>
                         <p className="text-sm text-muted-foreground mt-1">
-                          I authorize Bridge MDX and my healthcare providers to use and disclose
+                          I authorize Homebase and my healthcare providers to use and disclose
                           my protected health information for treatment, payment, and healthcare
                           operations as described in the Notice of Privacy Practices.
                         </p>

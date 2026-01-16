@@ -26,25 +26,25 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Bridge MDX | Intelligence-First Peptide Care",
-  description: "Where AI meets clinical expertise. Providers get data-driven protocols. Patients get answers they understand. The only peptide therapy EHR with built-in AI intelligence.",
+  title: "Homebase | One Login. Every Portal.",
+  description: "The secure command center for every login your dental team needs. One dashboard. Every portal. No more spreadsheets, no more password chaos.",
   generator: "v0.app",
   icons: {
-    icon: "/bridge-ai-icon.png",
-    shortcut: "/bridge-ai-icon.png",
-    apple: "/bridge-ai-icon.png",
+    icon: "/homebase-logo.png",
+    shortcut: "/homebase-logo.png",
+    apple: "/homebase-logo.png",
   },
   openGraph: {
-    title: "Bridge MDX | Intelligence-First Peptide Care",
-    description: "Where AI meets clinical expertise. Providers get data-driven protocols. Patients get answers they understand.",
-    url: "https://mdx.haestus.dev",
-    siteName: "Bridge MDX",
+    title: "Homebase | One Login. Every Portal.",
+    description: "The secure command center for every login your dental team needs. Stop hunting for passwords. Start running your practice.",
+    url: "https://homebase.dental",
+    siteName: "Homebase",
     images: [
       {
-        url: "/new.png",
+        url: "/homebase-logo.png",
         width: 1200,
         height: 630,
-        alt: "Bridge MDX - Intelligence-first peptide care platform",
+        alt: "Homebase - One login. Every portal.",
       },
     ],
     locale: "en_US",
@@ -52,9 +52,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bridge MDX | Intelligence-First Peptide Care",
-    description: "Where AI meets clinical expertise. Providers get data-driven protocols. Patients get answers they understand.",
-    images: ["/new.png"],
+    title: "Homebase | One Login. Every Portal.",
+    description: "The secure command center for every login your dental team needs. Stop hunting for passwords. Start running your practice.",
+    images: ["/homebase-logo.png"],
   },
 }
 

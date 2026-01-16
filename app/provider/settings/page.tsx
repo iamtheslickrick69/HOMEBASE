@@ -28,7 +28,7 @@ export default function ProviderSettingsPage() {
   const [profile, setProfile] = useState({
     firstName: "Sarah",
     lastName: "Williams",
-    email: "dr.williams@bridgemdx.com",
+    email: "dr.williams@homebase.dental",
     phone: "(555) 123-4567",
     title: "Nurse Practitioner",
     npi: "1234567890",
@@ -38,7 +38,7 @@ export default function ProviderSettingsPage() {
     deaNumber: "AW1234567",
     specialties: ["Peptide Therapy", "Weight Management", "Anti-Aging"],
     bio: "Board-certified Nurse Practitioner specializing in peptide therapy and regenerative medicine with over 10 years of experience.",
-    clinicName: "Bridge MDX Clinic",
+    clinicName: "Homebase Dental",
     clinicAddress: "123 Medical Plaza, Suite 100",
     clinicCity: "Phoenix",
     clinicState: "AZ",
