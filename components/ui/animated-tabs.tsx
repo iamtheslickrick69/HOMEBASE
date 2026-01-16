@@ -49,8 +49,8 @@ const portalTabs: Tab[] = [
     label: "Provider",
     content: (
       <div className="flex flex-col items-center justify-center text-center h-full py-4">
-        <div className="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center mb-4">
-          <UserCog className="w-7 h-7 text-cyan-400" strokeWidth={1.5} />
+        <div className="w-14 h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center mb-4">
+          <UserCog className="w-7 h-7 text-blue-400" strokeWidth={1.5} />
         </div>
         <h3 className="text-white font-semibold text-lg mb-1">Provider Portal</h3>
         <p className="text-neutral-500 text-sm mb-5">Patient care, protocols & dosing</p>
@@ -61,7 +61,7 @@ const portalTabs: Tab[] = [
             </button>
           </Link>
           <Link href="/auth/provider-login" className="flex-1">
-            <button className="w-full px-4 py-2.5 rounded-lg bg-cyan-500 text-white text-sm font-medium hover:bg-cyan-600 transition-colors flex items-center justify-center gap-1">
+            <button className="w-full px-4 py-2.5 rounded-lg bg-blue-500 text-white text-sm font-medium hover:bg-blue-600 transition-colors flex items-center justify-center gap-1">
               Login <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
             </button>
           </Link>
@@ -74,8 +74,8 @@ const portalTabs: Tab[] = [
     label: "Patient Portal",
     content: (
       <div className="flex flex-col items-center justify-center text-center h-full py-4">
-        <div className="w-14 h-14 rounded-2xl bg-rose-500/20 flex items-center justify-center mb-4">
-          <User className="w-7 h-7 text-rose-400" strokeWidth={1.5} />
+        <div className="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center mb-4">
+          <User className="w-7 h-7 text-red-400" strokeWidth={1.5} />
         </div>
         <h3 className="text-white font-semibold text-lg mb-1">Patient Portal</h3>
         <p className="text-neutral-500 text-sm mb-5">Orders, treatments & resources</p>
@@ -86,7 +86,7 @@ const portalTabs: Tab[] = [
             </button>
           </Link>
           <Link href="/auth/patient-login" className="flex-1">
-            <button className="w-full px-4 py-2.5 rounded-lg bg-rose-500 text-white text-sm font-medium hover:bg-rose-600 transition-colors flex items-center justify-center gap-1">
+            <button className="w-full px-4 py-2.5 rounded-lg bg-red-500 text-white text-sm font-medium hover:bg-red-600 transition-colors flex items-center justify-center gap-1">
               Login <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
             </button>
           </Link>

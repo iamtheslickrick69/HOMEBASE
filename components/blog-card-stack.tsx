@@ -82,7 +82,7 @@ const blogPosts: BlogPost[] = [
     description: "Understanding the Peptide Revolution",
     category: "Industry Trends",
     readTime: "6 min read",
-    image: "/blog-peptide-rise.jpg",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",
     content: `# The Rise of Peptide Therapy: What Clinics Need to Know
 
 ## The Peptide Revolution is Here
@@ -147,7 +147,7 @@ The clinics that will lead the peptide therapy revolution aren't those offering 
     description: "Navigating Regulatory Requirements",
     category: "Compliance",
     readTime: "8 min read",
-    image: "/blog-compliance.jpg",
+    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
     content: `# RUO Compliance: Why It Matters for Your Practice
 
 ## The Compliance Imperative
@@ -231,7 +231,7 @@ Practices with strong compliance frameworks see measurable benefits:
     description: "Building Trust Through Excellence",
     category: "Patient Care",
     readTime: "7 min read",
-    image: "/blog-patient-safety.jpg",
+    image: "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?auto=format&fit=crop&w=800&q=80",
     content: `# Patient Safety in Peptide Protocols: Building Trust Through Excellence
 
 ## Safety as the Foundation
@@ -326,7 +326,7 @@ Practices that invest in safety see measurable returns:
     description: "From Startup to Multi-Location",
     category: "Growth",
     readTime: "5 min read",
-    image: "/chess-board-close-up-strategic-game.jpg",
+    image: "https://images.unsplash.com/photo-1454391304352-2bf4678b1a7a?auto=format&fit=crop&w=800&q=80",
     content: placeholderContent.replace("# Placeholder Content", "# Scaling Your Peptide Practice"),
   },
   {
@@ -335,7 +335,7 @@ Practices that invest in safety see measurable returns:
     description: "Where Peptide Therapy is Heading",
     category: "Industry Trends",
     readTime: "6 min read",
-    image: "/blog-future-medicine.jpg",
+    image: "https://images.unsplash.com/photo-1418985991508-e47386d96a71?auto=format&fit=crop&w=800&q=80",
     content: placeholderContent.replace("# Placeholder Content", "# The Future of Regenerative Medicine"),
   },
   {
@@ -344,7 +344,7 @@ Practices that invest in safety see measurable returns:
     description: "Communication and Transparency",
     category: "Patient Care",
     readTime: "7 min read",
-    image: "/blog-patient-trust.jpg",
+    image: "https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?auto=format&fit=crop&w=800&q=80",
     content: placeholderContent.replace("# Placeholder Content", "# Building Patient Trust in Peptide Treatments"),
   },
 ]
@@ -388,31 +388,31 @@ function CardContent({
 
   return (
     <div className="flex h-full w-full flex-col gap-4">
-      <div className="relative -outline-offset-1 flex h-[200px] w-full items-center justify-center overflow-hidden rounded-lg outline outline-black/10 dark:outline-white/10">
+      <div className="relative -outline-offset-1 flex h-[200px] w-full items-center justify-center overflow-hidden rounded-lg outline outline-white/10">
         <img
           src={post.image || "/placeholder.svg"}
           alt={post.title}
           className="h-full w-full select-none object-cover"
         />
         <div className="absolute left-3 top-3 flex items-center gap-2">
-          <span className="rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground shadow-sm">
+          <span className="rounded-full bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-semibold text-neutral-900 shadow-sm">
             {post.category}
           </span>
         </div>
         <div className="absolute right-3 top-3">
-          <span className="rounded-full bg-background/95 px-2.5 py-1 text-xs font-medium text-foreground shadow-sm backdrop-blur-sm">
+          <span className="rounded-full bg-neutral-900/80 backdrop-blur-sm px-2.5 py-1 text-xs font-medium text-white shadow-sm border border-white/10">
             {post.readTime}
           </span>
         </div>
       </div>
       <div className="flex w-full items-center justify-between gap-2 px-3 pb-6">
         <div className="flex min-w-0 flex-1 flex-col">
-          <span className="truncate font-semibold text-foreground">{post.title}</span>
-          <span className="text-sm text-muted-foreground">{post.description}</span>
+          <span className="truncate font-semibold text-white">{post.title}</span>
+          <span className="text-sm text-neutral-400">{post.description}</span>
         </div>
         <button
           onClick={onReadClick}
-          className="flex h-10 shrink-0 cursor-pointer select-none items-center gap-0.5 rounded-full bg-primary pl-4 pr-3 text-sm font-medium text-primary-foreground transition-transform hover:scale-105 active:scale-95"
+          className="flex h-10 shrink-0 cursor-pointer select-none items-center gap-0.5 rounded-full bg-white/90 backdrop-blur-sm pl-4 pr-3 text-sm font-medium text-neutral-900 transition-transform hover:scale-105 active:scale-95 shadow-md"
         >
           Read
           <svg
@@ -466,9 +466,13 @@ function AnimatedCard({
         x: "-50%",
         bottom: 0,
       }}
-      className="absolute flex h-[280px] w-[324px] items-center justify-center overflow-hidden rounded-t-xl border-x border-t border-border bg-card p-1 shadow-lg will-change-transform sm:w-[512px]"
+      className="absolute flex h-[280px] w-[324px] items-center justify-center overflow-hidden rounded-t-xl border-x border-t border-white/10 bg-neutral-900/80 backdrop-blur-xl p-1 shadow-2xl shadow-black/50 will-change-transform sm:w-[512px]"
     >
-      <CardContent contentType={card.contentType} onReadClick={onReadClick} />
+      {/* Inner glow effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none"></div>
+      <div className="relative z-10 w-full h-full">
+        <CardContent contentType={card.contentType} onReadClick={onReadClick} />
+      </div>
     </motion.div>
   )
 }
@@ -510,12 +514,13 @@ export default function BlogCardStack() {
           </AnimatePresence>
         </div>
 
-        <div className="relative z-10 -mt-px flex w-full items-center justify-center border-t border-border bg-card py-4">
+        <div className="relative z-10 flex w-full items-center justify-center py-4">
           <button
             onClick={handleAnimate}
-            className="flex h-9 cursor-pointer select-none items-center justify-center gap-1 overflow-hidden rounded-lg border border-border bg-secondary px-4 font-medium text-secondary-foreground transition-all hover:bg-secondary/80 active:scale-[0.98]"
+            className="relative flex h-9 cursor-pointer select-none items-center justify-center gap-1 overflow-hidden rounded-lg border border-white/10 bg-neutral-900/60 backdrop-blur-md px-4 font-medium text-white transition-all hover:bg-neutral-800/70 active:scale-[0.98] shadow-lg"
           >
-            Next Article
+            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none"></div>
+            <span className="relative z-10">Next Article</span>
           </button>
         </div>
       </div>

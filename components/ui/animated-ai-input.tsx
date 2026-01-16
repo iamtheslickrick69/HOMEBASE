@@ -2,10 +2,13 @@
 
 import * as React from "react"
 import { AnimatePresence, motion } from "framer-motion"
-import { ArrowUp, Square, Building2, UserCog, User, Sparkles } from "lucide-react"
-import Image from "next/image"
+import { ArrowUp, Square, Building2, UserCog, User, Sparkles, BookOpen } from "lucide-react"
 import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { AtlasSourcesModal } from "@/components/ui/atlas-sources-modal"
+import { AtlasIcon } from "@/components/ui/atlas-icon"
+import { type AtlasSource, ATLAS_CAPABILITIES } from "@/lib/atlas-config"
 
 type RoleType = "clinic" | "provider" | "patient"
 
@@ -13,6 +16,7 @@ interface Message {
   id: string
   role: "user" | "assistant"
   content: string
+  sources?: AtlasSource[]
 }
 
 interface RoleConfig {
@@ -25,7 +29,6 @@ interface RoleConfig {
   borderColor: string
   placeholder: string
   prompts: string[]
-  responses: Record<string, string>
 }
 
 const roleConfigs: RoleConfig[] = [
@@ -37,245 +40,30 @@ const roleConfigs: RoleConfig[] = [
     activeColor: "text-gray-300",
     bgColor: "bg-gray-600",
     borderColor: "border-gray-500/30",
-    placeholder: "Ask about clinic operations, analytics, or compliance...",
-    prompts: ["Revenue analytics this month", "Provider scheduling conflicts", "HIPAA compliance checklist"],
-    responses: {
-      "Revenue analytics this month": `**Monthly Revenue Summary - January 2025**
-
-📊 **Total Revenue:** $127,450 (+12% vs last month)
-
-| Category | Amount | Change |
-|----------|--------|--------|
-| Consultations | $45,200 | +8% |
-| Peptide Sales | $67,800 | +18% |
-| Follow-ups | $14,450 | +3% |
-
-**Top Performers:**
-• Dr. Sarah Chen - $42,300 (33% of total)
-• Dr. Michael Ross - $38,150 (30% of total)
-
-**Recommendation:** Peptide sales are driving growth. Consider expanding inventory of BPC-157 and Semaglutide - both showing 25%+ demand increase.`,
-      "Provider scheduling conflicts": `**Scheduling Conflicts Detected - This Week**
-
-⚠️ **3 conflicts found:**
-
-1. **Tuesday 2:00 PM** - Dr. Chen double-booked
-   • Patient: John Martinez (Follow-up)
-   • Patient: Lisa Wong (New consultation)
-   • *Suggestion: Move Wong to 3:30 PM slot*
-
-2. **Wednesday 10:00 AM** - Room 2 unavailable
-   • Scheduled: Dr. Ross procedure
-   • *Suggestion: Relocate to Room 4*
-
-3. **Friday 4:00 PM** - Overtime risk
-   • 3 appointments after 4 PM
-   • *Suggestion: Redistribute to morning slots*
-
-**Quick Actions:** [Resolve All] [View Calendar] [Notify Providers]`,
-      "HIPAA compliance checklist": `**HIPAA Compliance Status - Q1 2025**
-
-✅ **Compliant Areas (8/10):**
-• Patient data encryption (AES-256)
-• Access logging enabled
-• Staff training completed (Dec 2024)
-• BAA agreements current
-• Incident response plan updated
-
-⚠️ **Action Required (2 items):**
-
-1. **Password Policy Update**
-   • Current: 90-day rotation
-   • Required: 60-day rotation
-   • *Due: Feb 15, 2025*
-
-2. **Workstation Security Audit**
-   • 2 stations missing screen locks
-   • Locations: Front desk, Lab room
-   • *Due: Feb 1, 2025*
-
-**Overall Score:** 87/100 - Good Standing`
-    },
+    placeholder: "Ask Atlas about clinic operations, analytics, or compliance...",
+    prompts: ["📊 How's my clinic performing this quarter?", "👥 Show me provider scheduling gaps", "✅ Check our HIPAA compliance status"]
   },
   {
     id: "provider",
     label: "Provider",
     icon: <UserCog className="h-4 w-4" strokeWidth={1.5} />,
-    color: "text-cyan-400",
-    activeColor: "text-cyan-300",
-    bgColor: "bg-cyan-500",
-    borderColor: "border-cyan-500/30",
-    placeholder: "Ask about protocols, dosing, or patient care...",
-    prompts: ["BPC-157 dosing calculator", "Compare GH peptide protocols", "Drug interaction check"],
-    responses: {
-      "BPC-157 dosing calculator": `**BPC-157 Dosing Calculator**
-
-Based on standard protocols for tissue repair and recovery:
-
-📋 **Recommended Dosing:**
-
-| Patient Weight | Daily Dose | Frequency |
-|----------------|------------|-----------|
-| < 150 lbs | 250 mcg | 2x daily |
-| 150-200 lbs | 300 mcg | 2x daily |
-| > 200 lbs | 350 mcg | 2x daily |
-
-**Administration:**
-• Route: Subcutaneous injection
-• Duration: 4-6 week cycles
-• Injection sites: Rotate between abdomen, thigh
-
-**Reconstitution:**
-• 5mg vial + 2ml BAC water = 250mcg per 0.1ml
-• Stable for 28 days refrigerated
-
-⚠️ **Note:** Adjust based on patient response. Start conservative with new patients.`,
-      "Compare GH peptide protocols": `**Growth Hormone Peptide Comparison**
-
-| Peptide | Mechanism | Best For | Dosing |
-|---------|-----------|----------|--------|
-| **CJC-1295/Ipamorelin** | GHRH + GHRP | Anti-aging, sleep | 100mcg each, 2x daily |
-| **Tesamorelin** | GHRH analog | Fat reduction | 2mg daily |
-| **Sermorelin** | GHRH | Entry-level GH | 200-300mcg nightly |
-| **MK-677** | Ghrelin mimetic | Muscle, appetite | 10-25mg oral daily |
-
-**My Recommendation for Most Patients:**
-
-🏆 **CJC-1295/Ipamorelin combo** - Best balance of efficacy and safety
-
-**Why:**
-• Synergistic GH release (3-5x natural pulse)
-• Minimal side effects
-• Doesn't suppress natural production
-• Well-studied safety profile
-
-**Cycle:** 12 weeks on, 4 weeks off`,
-      "Drug interaction check": `**Drug Interaction Analysis**
-
-Enter the medications to check, or here are common peptide interactions:
-
-⚠️ **Moderate Interactions:**
-
-| Peptide | Interacts With | Effect |
-|---------|----------------|--------|
-| BPC-157 | Blood thinners | May enhance effect |
-| Semaglutide | Insulin | Hypoglycemia risk |
-| CJC-1295 | Corticosteroids | Reduced efficacy |
-
-✅ **Generally Safe Combinations:**
-• BPC-157 + TB-500 (synergistic healing)
-• CJC-1295 + Ipamorelin (standard combo)
-• Semaglutide + Metformin (complementary)
-
-🔴 **Avoid:**
-• GH peptides + Active cancer treatment
-• Semaglutide + Other GLP-1 agonists
-
-**Pro Tip:** Always review patient's full medication list before starting peptide therapy.`
-    },
+    color: "text-blue-400",
+    activeColor: "text-blue-300",
+    bgColor: "bg-blue-500",
+    borderColor: "border-blue-500/30",
+    placeholder: "Ask Atlas about protocols, dosing, or patient care...",
+    prompts: ["💊 What's the best BPC-157 protocol?", "⚗️ Compare GH peptide options for me", "⚠️ Any interactions with semaglutide?"]
   },
   {
     id: "patient",
     label: "Patient",
     icon: <User className="h-4 w-4" strokeWidth={1.5} />,
-    color: "text-rose-400",
-    activeColor: "text-rose-300",
-    bgColor: "bg-rose-500",
-    borderColor: "border-rose-500/30",
-    placeholder: "Ask about your treatment, side effects, or next steps...",
-    prompts: ["Explain my treatment plan", "Common side effects", "Injection site guidance"],
-    responses: {
-      "Explain my treatment plan": `**Your Treatment Plan Summary**
-
-Hi! Here's a simple breakdown of your current peptide therapy:
-
-💊 **What You're Taking:**
-• **BPC-157** - Helps with tissue healing and gut health
-• **Dose:** 250mcg twice daily (morning and evening)
-
-📅 **Your Schedule:**
-• **Week 1-2:** Starting phase - you may not notice much yet
-• **Week 3-4:** Most patients start feeling improvements
-• **Week 5-8:** Full benefits typically achieved
-
-🎯 **Goals We're Working Toward:**
-1. Reduce joint discomfort
-2. Improve recovery after workouts
-3. Support digestive health
-
-📞 **Your Next Steps:**
-• Follow-up appointment: **Feb 15, 2025**
-• Lab work due: **Feb 10, 2025**
-
-*Questions about your specific treatment? Send a message to your provider anytime!*`,
-      "Common side effects": `**Common Side Effects - What to Expect**
-
-Most patients tolerate peptide therapy well. Here's what you might experience:
-
-✅ **Normal & Expected (usually mild):**
-• Slight redness at injection site (fades in 30 min)
-• Mild fatigue first few days (body adjusting)
-• Increased thirst (stay hydrated!)
-
-⚡ **Less Common:**
-• Mild headache (usually week 1 only)
-• Vivid dreams (actually a sign it's working!)
-• Slight nausea if taken without food
-
-🚨 **Contact Your Provider If:**
-• Severe pain at injection site
-• Difficulty breathing
-• Significant swelling
-• Symptoms that don't improve
-
-**Tips to Minimize Side Effects:**
-1. Stay well-hydrated (8+ glasses water)
-2. Take with a small meal if nausea occurs
-3. Rotate injection sites each time
-4. Don't skip doses - consistency helps
-
-*Most side effects resolve within the first 1-2 weeks as your body adjusts.*`,
-      "Injection site guidance": `**Injection Site Guide - Easy Steps**
-
-Don't worry - it gets easier with practice! Here's your guide:
-
-📍 **Best Injection Sites:**
-
-**1. Abdomen (Most Popular)**
-• 2 inches away from belly button
-• Rotate left and right sides
-• Avoid areas with stretch marks
-
-**2. Thigh (Good Alternative)**
-• Front or outer thigh
-• Middle third of your thigh
-• Easy to see and reach
-
-🔄 **Rotation Pattern:**
-\`\`\`
-Day 1: Left abdomen
-Day 2: Right abdomen
-Day 3: Left thigh
-Day 4: Right thigh
-(Repeat)
-\`\`\`
-
-📝 **Step-by-Step:**
-1. Wash hands thoroughly
-2. Clean site with alcohol swab
-3. Pinch skin gently
-4. Insert needle at 45-90° angle
-5. Inject slowly (5-10 seconds)
-6. Release pinch, remove needle
-7. Light pressure with cotton ball
-
-**Pro Tips:**
-• Let medication reach room temp first
-• Ice the area beforehand if sensitive
-• Never inject into bruised areas
-
-*You've got this! Most patients feel comfortable after 3-4 injections.*`
-    },
+    color: "text-red-400",
+    activeColor: "text-red-300",
+    bgColor: "bg-red-500",
+    borderColor: "border-red-500/30",
+    placeholder: "Ask Atlas about your treatment, side effects, or next steps...",
+    prompts: ["💉 How do I inject safely?", "🩺 What does BPC-157 actually do?", "⚠️ What side effects should I watch for?"]
   },
 ]
 
@@ -300,14 +88,86 @@ function TypingIndicator({ color }: { color: string }) {
           transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
         />
       </div>
-      <span className="text-xs text-neutral-500 ml-2">Bridge AI is thinking...</span>
+      <span className="text-xs text-neutral-500 ml-2">Atlas AI is thinking...</span>
+    </div>
+  )
+}
+
+// Quick action buttons component
+function QuickActionButtons({ roleId, onAction }: { roleId: RoleType; onAction: (action: string) => void }) {
+  const actions = {
+    clinic: [
+      { label: "📈 Show trends", value: "Show me detailed trends and analytics" },
+      { label: "💡 Suggestions", value: "What are your suggestions based on this?" },
+    ],
+    provider: [
+      { label: "📋 Protocol details", value: "Give me the full protocol details" },
+      { label: "💊 Dosing calculator", value: "Help me calculate the right dosage" },
+    ],
+    patient: [
+      { label: "📚 Learn more", value: "Tell me more about this" },
+      { label: "🗓️ What's next?", value: "What should I do next?" },
+    ],
+  }
+
+  return (
+    <div className="flex flex-wrap gap-2 mt-3 pt-3 border-t border-neutral-700/50">
+      {actions[roleId].map((action, i) => (
+        <button
+          key={i}
+          onClick={() => onAction(action.value)}
+          className="px-3 py-1.5 rounded-lg text-xs font-medium bg-neutral-700/50 hover:bg-neutral-700 text-neutral-300 hover:text-white transition-all duration-200 border border-neutral-600/50"
+        >
+          {action.label}
+        </button>
+      ))}
     </div>
   )
 }
 
 // Message component with markdown-like styling
-function ChatMessage({ message, roleConfig }: { message: Message; roleConfig: RoleConfig }) {
+function ChatMessage({
+  message,
+  roleConfig,
+  onViewSources,
+  onQuickAction,
+  isLatestAssistant
+}: {
+  message: Message
+  roleConfig: RoleConfig
+  onViewSources?: (sources: AtlasSource[]) => void
+  onQuickAction?: (action: string) => void
+  isLatestAssistant?: boolean
+}) {
   const isUser = message.role === "user"
+
+  // Friendly greetings for AI responses (shown at start)
+  const getGreeting = () => {
+    const greetings = {
+      clinic: ["Great question!", "Let me help with that.", "I've got you covered."],
+      provider: ["Good thinking!", "Let's dive into this.", "I can help with that."],
+      patient: ["Happy to help!", "I'm here for you.", "Let me explain that."],
+    }
+    const options = greetings[roleConfig.id]
+    return options[Math.floor(Math.random() * options.length)]
+  }
+
+  // Helpful closers (shown at end)
+  const getCloser = () => {
+    const closers = {
+      clinic: ["Need anything else about your operations?", "What else can I help you optimize?", "Any other clinic questions?"],
+      provider: ["Anything else about this protocol?", "Need more clinical guidance?", "Other patient care questions?"],
+      patient: ["Any other questions about your treatment?", "Is there anything else I can explain?", "What else would you like to know?"],
+    }
+    const options = closers[roleConfig.id]
+    return options[Math.floor(Math.random() * options.length)]
+  }
+
+  // Get current time
+  const getTimeString = () => {
+    const now = new Date()
+    return now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })
+  }
 
   // Simple markdown-like rendering
   const renderContent = (content: string) => {
@@ -360,14 +220,8 @@ function ChatMessage({ message, roleConfig }: { message: Message; roleConfig: Ro
       )}
     >
       {!isUser && (
-        <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden">
-          <Image
-            src="/bridge-ai-icon.png"
-            alt="Bridge AI"
-            width={80}
-            height={80}
-            className="object-contain scale-[3]"
-          />
+        <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
+          <AtlasIcon size={32} />
         </div>
       )}
       <div className={cn(
@@ -377,9 +231,39 @@ function ChatMessage({ message, roleConfig }: { message: Message; roleConfig: Ro
           : "bg-neutral-800 text-neutral-300"
       )}>
         {isUser ? (
-          <p>{message.content}</p>
+          <>
+            <p>{message.content}</p>
+            <p className="text-xs opacity-60 mt-2">{getTimeString()}</p>
+          </>
         ) : (
-          <div className="space-y-1">{renderContent(message.content)}</div>
+          <>
+            {/* Friendly greeting */}
+            <p className="text-xs font-medium text-blue-400 mb-2">✨ {getGreeting()}</p>
+
+            {/* Main content */}
+            <div className="space-y-1">{renderContent(message.content)}</div>
+
+            {/* Helpful closer */}
+            <p className="text-xs text-neutral-500 mt-3 italic">{getCloser()}</p>
+
+            {/* Sources button */}
+            {message.sources && message.sources.length > 0 && onViewSources && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => onViewSources(message.sources!)}
+                className="mt-3 h-7 text-xs text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 gap-1.5"
+              >
+                <BookOpen className="h-3 w-3" />
+                View {message.sources.length} Source{message.sources.length > 1 ? 's' : ''}
+              </Button>
+            )}
+
+            {/* Quick actions for latest message */}
+            {isLatestAssistant && onQuickAction && (
+              <QuickActionButtons roleId={roleConfig.id} onAction={onQuickAction} />
+            )}
+          </>
         )}
       </div>
       {isUser && (
@@ -400,6 +284,8 @@ export function AI_Prompt({ className }: AIInputProps) {
   const [isLoading, setIsLoading] = React.useState(false)
   const [activeRole, setActiveRole] = React.useState<RoleType>("provider")
   const [messages, setMessages] = React.useState<Message[]>([])
+  const [sourcesModalOpen, setSourcesModalOpen] = React.useState(false)
+  const [selectedSources, setSelectedSources] = React.useState<AtlasSource[]>([])
   const textareaRef = React.useRef<HTMLTextAreaElement>(null)
   const messagesEndRef = React.useRef<HTMLDivElement>(null)
 
@@ -424,7 +310,7 @@ export function AI_Prompt({ className }: AIInputProps) {
     }
   }
 
-  const handleSubmit = (query: string) => {
+  const handleSubmit = async (query: string) => {
     if (!query.trim() || isLoading) return
 
     // Add user message
@@ -437,23 +323,59 @@ export function AI_Prompt({ className }: AIInputProps) {
     setValue("")
     setIsLoading(true)
 
-    // Simulate AI response
-    setTimeout(() => {
-      const response = currentRole.responses[query] ||
-        `I understand you're asking about "${query}". This is a demo, but in the full version, I'd provide detailed, evidence-based guidance tailored to your ${currentRole.label.toLowerCase()} needs.\n\n**Try one of the suggested prompts** to see a full response example!`
+    try {
+      // Convert role to API format
+      const apiRole = activeRole === 'clinic' ? 'clinic_admin' : activeRole
+
+      // Call Atlas AI API
+      const response = await fetch('/api/atlas', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: query,
+          role: apiRole,
+          conversationHistory: messages.map(m => ({
+            role: m.role,
+            content: m.content
+          }))
+        })
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to get response from Atlas AI')
+      }
+
+      const data = await response.json()
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
-        content: response
+        content: data.message,
+        sources: data.sources || []
       }
       setMessages(prev => [...prev, assistantMessage])
+    } catch (error) {
+      console.error('Atlas AI Error:', error)
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: "assistant",
+        content: "I apologize, but I'm having trouble connecting right now. Please try again in a moment."
+      }
+      setMessages(prev => [...prev, errorMessage])
+    } finally {
       setIsLoading(false)
-    }, 1500)
+    }
   }
 
   const handlePromptClick = (prompt: string) => {
     handleSubmit(prompt)
+  }
+
+  const handleViewSources = (sources: AtlasSource[]) => {
+    setSelectedSources(sources)
+    setSourcesModalOpen(true)
   }
 
   return (
@@ -503,30 +425,58 @@ export function AI_Prompt({ className }: AIInputProps) {
         {/* Chat Messages Area */}
         <div className="h-[400px] overflow-y-auto">
           {messages.length === 0 ? (
-            // Empty state
+            // Empty state with personality
             <div className="h-full flex flex-col items-center justify-center text-center px-8">
-              <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 overflow-hidden">
-                <Image
-                  src="/bridge-ai-icon.png"
-                  alt="Bridge AI"
-                  width={200}
-                  height={200}
-                  className="object-contain scale-[3.5]"
-                />
-              </div>
-              <h3 className="text-white font-medium mb-2">
-                {currentRole.label} Assistant Ready
-              </h3>
-              <p className="text-neutral-500 text-sm max-w-md">
-                Ask me anything about {currentRole.id === "clinic" ? "clinic operations and analytics" : currentRole.id === "provider" ? "peptide protocols and patient care" : "your treatment plan and medications"}. Try one of the suggestions below to see me in action.
-              </p>
+              <motion.div
+                className="w-16 h-16 flex items-center justify-center mb-4"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+              >
+                <AtlasIcon size={64} />
+              </motion.div>
+              <motion.div
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.1, duration: 0.4 }}
+              >
+                <h3 className="text-white font-medium mb-2 text-lg">
+                  {currentRole.id === "clinic"
+                    ? "👋 Hey there! I'm Atlas, your clinic intelligence partner."
+                    : currentRole.id === "provider"
+                    ? "👋 Hi! I'm Atlas, here to help you provide exceptional care."
+                    : "👋 Welcome! I'm Atlas, your personal peptide guide."}
+                </h3>
+                <p className="text-neutral-400 text-sm max-w-md mb-4 leading-relaxed">
+                  {currentRole.id === "clinic"
+                    ? "I can help you understand your metrics, optimize scheduling, and stay compliant. What would you like to know?"
+                    : currentRole.id === "provider"
+                    ? "I'm here to assist with protocols, dosing guidance, and patient care decisions. How can I help today?"
+                    : "I'll help you understand your treatment, answer questions about peptides, and guide you through your wellness journey. What's on your mind?"}
+                </p>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-neutral-800/50 border border-neutral-700/50">
+                  <Sparkles className={cn("h-3 w-3", currentRole.color)} strokeWidth={1.5} />
+                  <span className="text-xs text-neutral-500">Try a question below to get started</span>
+                </div>
+              </motion.div>
             </div>
           ) : (
             // Messages
             <div className="py-4">
-              {messages.map((message) => (
-                <ChatMessage key={message.id} message={message} roleConfig={currentRole} />
-              ))}
+              {messages.map((message, index) => {
+                // Check if this is the latest assistant message
+                const isLatestAssistant = message.role === "assistant" && index === messages.length - 1
+                return (
+                  <ChatMessage
+                    key={message.id}
+                    message={message}
+                    roleConfig={currentRole}
+                    onViewSources={handleViewSources}
+                    onQuickAction={handleSubmit}
+                    isLatestAssistant={isLatestAssistant}
+                  />
+                )
+              })}
               {isLoading && <TypingIndicator color={currentRole.color} />}
               <div ref={messagesEndRef} />
             </div>
@@ -544,7 +494,7 @@ export function AI_Prompt({ className }: AIInputProps) {
               transition={{ duration: 0.2 }}
               className="flex flex-wrap items-center gap-2"
             >
-              <span className="text-xs text-neutral-600">Try:</span>
+              <span className="text-xs text-neutral-500 font-medium">💡 Popular questions:</span>
               {currentRole.prompts.map((prompt, index) => (
                 <button
                   key={index}
@@ -554,7 +504,7 @@ export function AI_Prompt({ className }: AIInputProps) {
                     "px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200",
                     "bg-neutral-800/50 border",
                     currentRole.borderColor,
-                    "hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed",
+                    "hover:bg-neutral-800 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed",
                     currentRole.color
                   )}
                 >
@@ -577,7 +527,7 @@ export function AI_Prompt({ className }: AIInputProps) {
               disabled={isLoading}
               className={cn(
                 "flex-1 bg-neutral-800/50 border border-neutral-700/50 rounded-xl resize-none text-white placeholder:text-neutral-500 focus:ring-1 focus:border-transparent text-sm py-3 px-4 min-h-[48px] max-h-[120px]",
-                `focus:ring-${currentRole.id === "clinic" ? "gray" : currentRole.id === "provider" ? "cyan" : "rose"}-500/50`
+                `focus:ring-${currentRole.id === "clinic" ? "gray" : currentRole.id === "provider" ? "blue" : "red"}-500/50`
               )}
               rows={1}
             />
@@ -624,6 +574,13 @@ export function AI_Prompt({ className }: AIInputProps) {
           </div>
         </div>
       </div>
+
+      {/* Atlas Sources Modal */}
+      <AtlasSourcesModal
+        open={sourcesModalOpen}
+        onOpenChange={setSourcesModalOpen}
+        sources={selectedSources}
+      />
     </div>
   )
 }

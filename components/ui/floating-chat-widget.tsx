@@ -3,8 +3,8 @@
 import * as React from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X } from "lucide-react"
-import Image from "next/image"
 import { AI_Prompt } from "./animated-ai-input"
+import { AtlasIcon } from "./atlas-icon"
 
 export function FloatingChatWidget() {
   const [isOpen, setIsOpen] = React.useState(false)
@@ -21,20 +21,14 @@ export function FloatingChatWidget() {
       {/* Floating Button */}
       <motion.button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-neutral-800 border border-neutral-700 shadow-2xl shadow-black/50 flex items-center justify-center overflow-hidden hover:bg-neutral-700 hover:scale-105 transition-all duration-200"
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-2xl bg-gradient-to-b from-neutral-800 to-neutral-900 border border-neutral-700 shadow-2xl shadow-black/50 flex items-center justify-center hover:border-neutral-600 hover:scale-105 transition-all duration-200"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: isOpen ? 0 : 1, scale: isOpen ? 0.8 : 1, pointerEvents: isOpen ? "none" : "auto" }}
         transition={{ duration: 0.2 }}
       >
-        <Image
-          src="/bridge-ai-icon.png"
-          alt="Bridge AI"
-          width={80}
-          height={80}
-          className="object-contain scale-[3]"
-        />
+        <AtlasIcon size={40} />
       </motion.button>
 
       {/* Chat Modal Overlay */}

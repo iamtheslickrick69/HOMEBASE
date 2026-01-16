@@ -17,15 +17,13 @@ type FeatureCardProps = React.ComponentProps<'div'> & {
     patternSeed?: number;
 };
 
-// Color configs for PixelCanvas
+// Color configs for PixelCanvas - Grayscale only
 const pixelColors = {
     gray: ["#9ca3af", "#d1d5db", "#e5e7eb"],
-    cyan: ["#06b6d4", "#67e8f9", "#a5f3fc"],
-    rose: ["#f43f5e", "#fb7185", "#fda4af"],
 };
 
 export function FeatureCard({ feature, className, patternSeed = 0, ...props }: FeatureCardProps) {
-    const colorKey = (feature.badgeColor || "gray") as keyof typeof pixelColors;
+    const colorKey = "gray" as const;
 
     return (
         <div className={cn('relative overflow-hidden p-6', className)} {...props}>
@@ -40,30 +38,18 @@ export function FeatureCard({ feature, className, patternSeed = 0, ...props }: F
                 {/* Horizontal Header Row */}
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                        <div className={cn(
-                            "flex items-center justify-center w-10 h-10 rounded-xl",
-                            feature.badgeColor === "gray" && "bg-gray-200 text-gray-700",
-                            feature.badgeColor === "cyan" && "bg-cyan-100 text-cyan-600",
-                            feature.badgeColor === "rose" && "bg-rose-100 text-rose-600",
-                            !feature.badgeColor && "bg-gray-100 text-gray-600"
-                        )}>
+                        <div className="flex items-center justify-center w-10 h-10 rounded-xl backdrop-blur-sm bg-gray-500/20 text-gray-300">
                             <feature.icon className="w-5 h-5" strokeWidth={1.5} aria-hidden />
                         </div>
-                        <h3 className="text-base font-semibold text-slate-900">{feature.title}</h3>
+                        <h3 className="text-base font-semibold text-white">{feature.title}</h3>
                     </div>
                     {feature.badge && (
-                        <span className={cn(
-                            "text-xs px-3 py-1 rounded-full font-medium",
-                            feature.badgeColor === "gray" && "bg-gray-200 text-gray-700",
-                            feature.badgeColor === "cyan" && "bg-cyan-100 text-cyan-700",
-                            feature.badgeColor === "rose" && "bg-rose-100 text-rose-700",
-                            !feature.badgeColor && "bg-gray-100 text-gray-700"
-                        )}>
+                        <span className="text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm bg-gray-500/20 text-gray-300">
                             {feature.badge}
                         </span>
                     )}
                 </div>
-                <p className="text-slate-700 font-medium relative z-20 text-sm leading-relaxed">{feature.description}</p>
+                <p className="text-neutral-400 font-medium relative z-20 text-sm leading-relaxed">{feature.description}</p>
             </div>
         </div>
     );

@@ -8,6 +8,9 @@ import DigitalSerenity from "@/components/ui/digital-serenity-animated-landing-p
 import BlogCardStack from "@/components/blog-card-stack"
 import { AnimatedTabs } from "@/components/ui/animated-tabs"
 import { PixelCanvas } from "@/components/ui/pixel-canvas"
+import RotatingEarth from "@/components/ui/wireframe-dotted-globe"
+import { TransitionPanel } from "@/components/ui/transition-panel"
+import { GradientWave } from "@/components/ui/gradient-wave"
 import {
   Building2,
   UserCog,
@@ -27,6 +30,9 @@ import {
   Clock,
   CreditCard,
   MessageSquare,
+  Database,
+  Brain,
+  Share2,
 } from "lucide-react"
 import { useState, useEffect } from "react"
 
@@ -83,42 +89,42 @@ const roleFeatures = {
       title: "Auto-Charting",
       description: "Reduce documentation time by 50% with intelligent charting that captures every action.",
       badge: "Provider",
-      badgeColor: "cyan",
+      badgeColor: "gray",
     },
     {
       icon: FlaskConical,
       title: "Peptide Protocols",
       description: "70+ peptide catalog with dosing guides, reconstitution calculators, and tracking.",
       badge: "Provider",
-      badgeColor: "cyan",
+      badgeColor: "gray",
     },
     {
       icon: Calculator,
       title: "Dosing Calculator",
       description: "Interactive reconstitution calculator with visual syringe guides and saved calculations.",
       badge: "Provider",
-      badgeColor: "cyan",
+      badgeColor: "gray",
     },
     {
       icon: Shield,
       title: "Treatment Protocols",
       description: "Create, manage, and assign custom treatment protocols to patients.",
       badge: "Provider",
-      badgeColor: "cyan",
+      badgeColor: "gray",
     },
     {
       icon: BarChart3,
       title: "Lab Integration",
       description: "Order labs, view results, and track patient biomarkers over time.",
       badge: "Provider",
-      badgeColor: "cyan",
+      badgeColor: "gray",
     },
     {
       icon: Phone,
       title: "Emergency Telemedicine",
       description: "Instant patient access for safety concerns with complete audit logging.",
       badge: "Provider",
-      badgeColor: "cyan",
+      badgeColor: "gray",
     },
   ],
   patient: [
@@ -127,50 +133,50 @@ const roleFeatures = {
       title: "Treatment Dashboard",
       description: "View your active protocols, dosing schedule, and treatment progress.",
       badge: "Patient",
-      badgeColor: "rose",
+      badgeColor: "gray",
     },
     {
       icon: FlaskConical,
       title: "Order Peptides",
       description: "Browse the catalog, place orders, and track shipments to your door.",
       badge: "Patient",
-      badgeColor: "rose",
+      badgeColor: "gray",
     },
     {
       icon: Calculator,
       title: "Personal Dosing Guide",
       description: "Your reconstitution instructions with step-by-step video tutorials.",
       badge: "Patient",
-      badgeColor: "rose",
+      badgeColor: "gray",
     },
     {
       icon: UserCog,
       title: "Appointment Scheduling",
       description: "Book visits with your provider, manage appointments, and set reminders.",
       badge: "Patient",
-      badgeColor: "rose",
+      badgeColor: "gray",
     },
     {
       icon: Phone,
       title: "Emergency Access",
       description: "24/7 emergency telemedicine connection for urgent safety concerns.",
       badge: "Patient",
-      badgeColor: "rose",
+      badgeColor: "gray",
     },
     {
       icon: CheckCircle2,
       title: "Progress Tracking",
       description: "Track your outcomes, log symptoms, and visualize your health journey.",
       badge: "Patient",
-      badgeColor: "rose",
+      badgeColor: "gray",
     },
   ],
 }
 
 const roleColors = {
   admin: { bg: "from-gray-600 to-gray-700", accent: "gray", badge: "bg-gray-500/20 text-gray-400 border-gray-500/30" },
-  provider: { bg: "from-cyan-500 to-cyan-600", accent: "cyan", badge: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30" },
-  patient: { bg: "from-rose-500 to-rose-600", accent: "rose", badge: "bg-rose-500/20 text-rose-400 border-rose-500/30" },
+  provider: { bg: "from-blue-500 to-blue-600", accent: "blue", badge: "bg-blue-500/20 text-blue-400 border-blue-500/30" },
+  patient: { bg: "from-red-500 to-red-600", accent: "red", badge: "bg-red-500/20 text-red-400 border-red-500/30" },
 }
 
 const roleLabels = {
@@ -184,6 +190,7 @@ export default function HomePage() {
   const [activeFilter, setActiveFilter] = useState<RoleFilter>("all")
   const [isAnimating, setIsAnimating] = useState(false)
   const [openAccordion, setOpenAccordion] = useState<number | null>(0)
+  const [atlasActiveIndex, setAtlasActiveIndex] = useState(0)
 
   const handleFilterChange = (filter: RoleFilter) => {
     if (filter === activeFilter) return
@@ -271,79 +278,87 @@ export default function HomePage() {
         <div className="text-center max-w-5xl mx-auto mb-8">
           {/* Main headline */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extralight text-white mb-5 leading-[1.1] tracking-tight">
-            <span className="word-animate" data-delay="200">Intelligence-first</span>
+            <span className="word-animate" data-delay="200">#1 AI Powered Solution</span>
             <br />
-            <span className="word-animate text-neutral-300" data-delay="500">peptide care.</span>
+            <span className="word-animate text-neutral-300" data-delay="500">for Healthcare</span>
           </h1>
 
           {/* Subtitle */}
           <p className="word-animate text-base sm:text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto leading-relaxed font-light" data-delay="800">
-            Where AI meets clinical expertise. Providers get data-driven protocols. Patients get answers they understand.
+            Empowering clinics and patients to safely store their personal data and accurately understand it.
           </p>
 
           </div>
 
         {/* Two Cards: Member Login + Start Clinic */}
         <div
-          className="w-full max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 border border-dashed border-neutral-700 rounded-xl overflow-hidden mb-10"
+          className="w-full max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10"
           style={{ opacity: 0, animation: 'word-appear 0.8s ease-out forwards', animationDelay: '1.2s' }}
         >
-          {/* Left Card: Member Login */}
-          <div className="relative p-6 bg-neutral-900/40 flex flex-col border-r border-dashed border-neutral-700 lg:border-r">
+          {/* Left Card: Member Login - Pure Liquid Glass */}
+          <div className="relative p-6 bg-neutral-900/60 backdrop-blur-xl flex flex-col rounded-xl shadow-2xl shadow-black/50">
+            {/* Inner glow effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent pointer-events-none rounded-xl"></div>
+
             {/* Horizontal Header Row */}
-            <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center justify-between mb-3 relative z-10">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-neutral-800 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-xl bg-neutral-800/80 backdrop-blur-sm flex items-center justify-center border border-white/5">
                   <User className="w-4 h-4 text-neutral-400" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-sm font-semibold text-white">Member Login</h3>
               </div>
-              <span className="text-[10px] px-2 py-1 rounded-full font-medium bg-neutral-800 text-neutral-400">Secure</span>
+              <span className="text-[10px] px-2 py-1 rounded-full font-medium bg-neutral-800/80 backdrop-blur-sm text-neutral-400 border border-white/5">Secure</span>
             </div>
-            <p className="text-neutral-500 text-xs mb-4 leading-relaxed">
+            <p className="text-neutral-500 text-xs mb-4 leading-relaxed relative z-10">
               Access your dashboard based on your role.
             </p>
-            <AnimatedTabs className="w-full flex-1" />
+            <div className="relative z-10 flex-1">
+              <AnimatedTabs className="w-full" />
+            </div>
           </div>
 
-          {/* Right Card: Start Your Clinic (Primary CTA) */}
-          <div className="relative p-6 bg-gradient-to-br from-neutral-900/60 to-cyan-950/30 flex flex-col">
+          {/* Right Card: Start Your Clinic - Liquid Glass */}
+          <div className="relative p-6 bg-neutral-900/60 backdrop-blur-xl flex flex-col rounded-xl shadow-2xl shadow-black/50">
+            {/* Inner glow effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-transparent pointer-events-none rounded-xl"></div>
+
             {/* Horizontal Header Row */}
-            <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center justify-between mb-3 relative z-10">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-cyan-900/60 flex items-center justify-center">
-                  <Zap className="w-4 h-4 text-cyan-400" strokeWidth={1.5} />
+                <div className="w-9 h-9 rounded-xl bg-neutral-800/70 backdrop-blur-sm flex items-center justify-center border border-neutral-700/50">
+                  <Zap className="w-4 h-4 text-neutral-300" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-sm font-semibold text-white">Start Your Clinic</h3>
               </div>
-              <span className="text-[10px] px-2 py-1 rounded-full font-medium bg-cyan-900/60 text-cyan-300">Free Trial</span>
+              <span className="text-[10px] px-2 py-1 rounded-full font-medium bg-neutral-800/70 backdrop-blur-sm text-neutral-300 border border-neutral-700/50">Free Trial</span>
             </div>
-            <p className="text-neutral-400 text-xs mb-4 leading-relaxed">
+            <p className="text-neutral-400 text-xs mb-4 leading-relaxed relative z-10">
               The only peptide therapy EHR with built-in AI intelligence.
             </p>
 
             {/* Trust Badges - 2x2 Grid */}
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4 relative z-10">
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" strokeWidth={2} />
+                <CheckCircle2 className="h-3.5 w-3.5 text-neutral-400" strokeWidth={2} />
                 <span className="text-xs text-neutral-300">HIPAA Compliant</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" strokeWidth={2} />
+                <CheckCircle2 className="h-3.5 w-3.5 text-neutral-400" strokeWidth={2} />
                 <span className="text-xs text-neutral-300">70+ Protocols</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" strokeWidth={2} />
+                <CheckCircle2 className="h-3.5 w-3.5 text-neutral-400" strokeWidth={2} />
                 <span className="text-xs text-neutral-300">AI-Powered</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" strokeWidth={2} />
+                <CheckCircle2 className="h-3.5 w-3.5 text-neutral-400" strokeWidth={2} />
                 <span className="text-xs text-neutral-300">14-Day Free Trial</span>
               </div>
             </div>
 
             {/* What's Included */}
-            <div className="border-t border-dashed border-neutral-700 pt-4 mb-4">
+            <div className="border-t border-dashed border-neutral-700 pt-4 mb-4 relative z-10">
               <p className="text-[10px] uppercase tracking-wider text-neutral-500 mb-2">Includes</p>
               <div className="flex flex-wrap gap-1.5">
                 <span className="text-[10px] px-2 py-1 rounded bg-neutral-800/80 text-neutral-400">Provider Portal</span>
@@ -355,9 +370,9 @@ export default function HomePage() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex gap-2 mt-auto">
+            <div className="flex gap-2 mt-auto relative z-10">
               <Link href="/auth/clinic-register" className="flex-1">
-                <Button size="default" className="w-full bg-cyan-500 hover:bg-cyan-400 text-white rounded-lg shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all">
+                <Button size="default" className="w-full bg-white hover:bg-neutral-100 text-black rounded-lg shadow-lg transition-all">
                   Get Started
                   <ArrowRight className="ml-2 h-4 w-4" strokeWidth={2} />
                 </Button>
@@ -374,158 +389,176 @@ export default function HomePage() {
 
         {/* Scroll indicator */}
         <button
-          onClick={() => scrollToSection("ai-section")}
+          onClick={() => scrollToSection("atlas-section")}
           className="text-neutral-500 hover:text-neutral-300 transition-colors animate-bounce"
         >
           <ChevronDown className="h-8 w-8" strokeWidth={1.5} />
         </button>
       </section>
 
-      {/* AI Assistant Section - Compact Feature Grid */}
-      <section id="ai-section" className="py-16 px-4 relative overflow-hidden">
-        <div className="container mx-auto max-w-5xl">
-          {/* Section Header */}
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-4">
-              <Zap className="h-4 w-4 text-cyan-400" strokeWidth={1.5} />
-              <span className="text-sm font-medium text-cyan-400">Bridge AI</span>
+      {/* Atlas AI Section - Hero Globe Background */}
+      <section id="atlas-section" className="py-24 px-4 relative overflow-hidden min-h-[900px] flex items-center">
+        {/* Gradient Wave Background - Behind everything */}
+        <GradientWave
+          colors={["#38bdf8", "#ffffff", "#38bdf8", "#ffffff", "#38bdf8", "#ffffff"]}
+          className="opacity-50"
+          noiseSpeed={0.00001}
+          shadowPower={5}
+          darkenTop={false}
+        />
+
+        {/* MASSIVE Globe Background */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+          <div className="opacity-15">
+            <RotatingEarth width={700} height={700} className="w-[700px] h-[700px]" />
+          </div>
+        </div>
+
+        {/* Subtle ambient glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02)_0%,transparent_70%)] z-20 pointer-events-none"></div>
+
+        <div className="container mx-auto max-w-4xl relative z-30">
+          {/* Header - Centered */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-800/70 border border-neutral-700/50 mb-4 backdrop-blur-sm">
+              <Sparkles className="h-4 w-4 text-neutral-300" strokeWidth={1.5} />
+              <span className="text-sm font-medium text-neutral-300">Introducing Atlas AI</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-light text-white mb-2">
-              AI-powered assistance for every role
+            <h2 className="text-4xl md:text-5xl font-extralight text-white mb-2 tracking-tight">
+              Intelligence That's Yours
             </h2>
-            <p className="text-neutral-500 text-sm max-w-xl mx-auto">
-              Instant answers, smart protocols, and personalized guidance - all trained on peptide therapy best practices.
+            <p className="text-neutral-300 text-lg font-medium mb-3">
+              Map out your health!!
+            </p>
+            <p className="text-neutral-400 text-base max-w-xl mx-auto font-light">
+              Powered by your data. Protected by design. Perfected for you.
             </p>
           </div>
 
-          {/* 3-Column Role Cards - Dashed Grid Style */}
-          <div className="grid grid-cols-1 md:grid-cols-3 divide-x divide-y divide-dashed divide-neutral-700 border border-dashed border-neutral-700 rounded-xl overflow-hidden mb-8">
-            {/* Clinic Card */}
-            <div className="relative p-6 bg-neutral-900/40 hover:bg-neutral-800/50 transition-colors overflow-hidden">
-              <PixelCanvas
-                gap={10}
-                speed={20}
-                colors={["#374151", "#4b5563", "#6b7280"]}
-                variant="default"
-                noFocus
-              />
-              <div className="relative z-10">
-                {/* Horizontal Header Row */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gray-700/50 flex items-center justify-center">
-                      <Building2 className="w-5 h-5 text-gray-400" strokeWidth={1.5} />
-                    </div>
-                    <h3 className="text-base font-semibold text-white">Operations & Analytics</h3>
+          {/* Icon Pills - Floating with Backdrop Blur */}
+          <div className="flex items-center justify-center gap-3 mb-10">
+            {[
+              { icon: Database, title: 'Your Data Diamond', desc: 'Military-grade encryption. Zero sharing. Complete ownership.' },
+              { icon: Brain, title: 'Personalized Predictions', desc: 'AI learns YOUR body—not population averages.' },
+              { icon: BarChart3, title: 'Treatment Timeline', desc: 'Track peptide cycles and optimal dosing windows.' },
+              { icon: Share2, title: 'Share on YOUR Terms', desc: 'Export, share, or delete anytime. You control it all.' },
+              { icon: MessageSquare, title: 'Atlas AI', desc: 'Your personal AI assistant trained on peptide therapy protocols and research.' },
+            ].map((feature, index) => {
+              const Icon = feature.icon
+              const isActive = atlasActiveIndex === index
+              return (
+                <button
+                  key={index}
+                  onClick={() => setAtlasActiveIndex(index)}
+                  className={`group relative w-14 h-14 rounded-xl border transition-all duration-200 backdrop-blur-md ${
+                    isActive
+                      ? 'bg-white/20 border-white/60 scale-110 shadow-lg shadow-white/25'
+                      : 'bg-neutral-900/60 border-neutral-700 hover:border-neutral-500 hover:scale-105'
+                  }`}
+                  title={feature.title}
+                >
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Icon className={`w-6 h-6 ${isActive ? 'text-white' : 'text-neutral-400'}`} strokeWidth={1.5} />
                   </div>
-                  <span className="text-xs px-3 py-1 rounded-full font-medium bg-gray-700/50 text-gray-300">
-                    Clinic
+                  <span className={`absolute -top-1 -right-1 w-5 h-5 rounded-full text-xs font-bold flex items-center justify-center ${
+                    isActive ? 'bg-white text-black shadow-md' : 'bg-neutral-800 text-neutral-500'
+                  }`}>
+                    {index + 1}
                   </span>
-                </div>
-                <p className="text-white font-medium text-sm leading-relaxed">
-                  Revenue forecasting, provider scheduling, and compliance monitoring powered by AI.
-                </p>
-              </div>
-            </div>
+                </button>
+              )
+            })}
+          </div>
 
-            {/* Provider Card */}
-            <div className="relative p-6 bg-neutral-900/40 hover:bg-neutral-800/50 transition-colors overflow-hidden">
-              <PixelCanvas
-                gap={10}
-                speed={20}
-                colors={["#164e63", "#0891b2", "#22d3ee"]}
-                variant="default"
-                noFocus
-              />
-              <div className="relative z-10">
-                {/* Horizontal Header Row */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-cyan-900/50 flex items-center justify-center">
-                      <UserCog className="w-5 h-5 text-cyan-400" strokeWidth={1.5} />
-                    </div>
-                    <h3 className="text-base font-semibold text-white">Protocols & Dosing</h3>
+          {/* Enhanced Feature Card with Glass Effect */}
+          <TransitionPanel
+            activeIndex={atlasActiveIndex}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            variants={{
+              enter: { opacity: 0, y: 10 },
+              center: { opacity: 1, y: 0 },
+              exit: { opacity: 0, y: -10 },
+            }}
+            className="mb-12"
+          >
+            {[
+              { icon: Database, title: 'Your Data Diamond', desc: 'Military-grade encryption. Zero sharing. Complete ownership.' },
+              { icon: Brain, title: 'Personalized Predictions', desc: 'AI learns YOUR body—not population averages.' },
+              { icon: BarChart3, title: 'Treatment Timeline', desc: 'Track peptide cycles and optimal dosing windows.' },
+              { icon: Share2, title: 'Share on YOUR Terms', desc: 'Export, share, or delete anytime. You control it all.' },
+              { icon: MessageSquare, title: 'Atlas AI', desc: 'Your personal AI assistant trained on peptide therapy protocols and research.' },
+            ].map((feature, index) => {
+              const Icon = feature.icon
+              return (
+                <div key={index} className="flex items-center gap-4 px-6 py-5 rounded-xl bg-neutral-900/70 backdrop-blur-md border border-dashed border-neutral-700 max-w-2xl mx-auto shadow-xl">
+                  <div className="w-14 h-14 rounded-xl bg-neutral-800/70 flex items-center justify-center flex-shrink-0 border border-neutral-700/50">
+                    <Icon className="w-7 h-7 text-neutral-300" strokeWidth={1.5} />
                   </div>
-                  <span className="text-xs px-3 py-1 rounded-full font-medium bg-cyan-900/50 text-cyan-300">
-                    Provider
-                  </span>
+                  <div>
+                    <h3 className="text-white font-semibold mb-1 text-lg">{feature.title}</h3>
+                    <p className="text-neutral-400 text-sm leading-relaxed">{feature.desc}</p>
+                  </div>
                 </div>
-                <p className="text-white font-medium text-sm leading-relaxed">
-                  Smart calculators, drug interactions, and evidence-based treatment recommendations.
-                </p>
-              </div>
-            </div>
+              )
+            })}
+          </TransitionPanel>
 
-            {/* Patient Card */}
-            <div className="relative p-6 bg-neutral-900/40 hover:bg-neutral-800/50 transition-colors overflow-hidden">
-              <PixelCanvas
-                gap={10}
-                speed={20}
-                colors={["#881337", "#e11d48", "#fb7185"]}
-                variant="default"
-                noFocus
-              />
-              <div className="relative z-10">
-                {/* Horizontal Header Row */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-rose-900/50 flex items-center justify-center">
-                      <User className="w-5 h-5 text-rose-400" strokeWidth={1.5} />
-                    </div>
-                    <h3 className="text-base font-semibold text-white">Guidance & Support</h3>
-                  </div>
-                  <span className="text-xs px-3 py-1 rounded-full font-medium bg-rose-900/50 text-rose-300">
-                    Patient
-                  </span>
-                </div>
-                <p className="text-white font-medium text-sm leading-relaxed">
-                  Treatment explanations, side effect guidance, and step-by-step injection instructions.
-                </p>
-              </div>
+          {/* Stats - Glass Morphism Badges */}
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
+            <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-neutral-900/70 backdrop-blur-md border border-neutral-800 shadow-lg">
+              <Lock className="w-4 h-4 text-neutral-300" strokeWidth={1.5} />
+              <div className="text-2xl font-bold text-white">100%</div>
+              <div className="text-xs text-neutral-400">Data Ownership</div>
+            </div>
+            <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-neutral-900/70 backdrop-blur-md border border-neutral-800 shadow-lg">
+              <Shield className="w-4 h-4 text-neutral-300" strokeWidth={1.5} />
+              <div className="text-2xl font-bold text-white">0</div>
+              <div className="text-xs text-neutral-400">Third-Party Sharing</div>
+            </div>
+            <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-neutral-900/70 backdrop-blur-md border border-neutral-800 shadow-lg">
+              <Lock className="w-4 h-4 text-neutral-300" strokeWidth={1.5} />
+              <div className="text-2xl font-bold text-white">256-bit</div>
+              <div className="text-xs text-neutral-400">Encryption + HIPAA++</div>
             </div>
           </div>
 
-          {/* CTA Button */}
+          {/* CTA with Pulsing Glow */}
           <div className="text-center">
             <button
               onClick={() => window.dispatchEvent(new CustomEvent("open-chat-widget"))}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-white font-medium transition-colors"
+              className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white hover:bg-neutral-100 text-black font-semibold transition-all hover:scale-105 shadow-xl"
             >
-              <MessageSquare className="w-4 h-4" strokeWidth={1.5} />
-              Try Bridge AI
+              <span className="relative">Experience Atlas AI</span>
+              <ArrowRight className="relative w-4 h-4 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
             </button>
-            <p className="text-neutral-600 text-xs mt-3">
-              Or click the chat icon in the bottom right corner
-            </p>
           </div>
-
-          {/* Subtle glow effect */}
-          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-cyan-500/5 via-transparent to-transparent"></div>
         </div>
       </section>
 
-      {/* Features Section with Role Filter - Light Theme */}
-      <section id="features" className="py-24 px-4 bg-white">
-        <div className="container mx-auto max-w-5xl">
+      {/* Features Section - Dark Theme with Liquid Glass */}
+      <section id="features" className="py-24 px-4 bg-neutral-950 relative overflow-hidden">
+        {/* Subtle ambient glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(100,100,100,0.03)_0%,transparent_60%)] pointer-events-none"></div>
+        <div className="container mx-auto max-w-5xl relative z-10">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
               Powerful tools for every role.
             </h2>
-            <p className="text-neutral-500 max-w-2xl mx-auto font-light mb-8">
+            <p className="text-neutral-400 max-w-2xl mx-auto font-light mb-8">
               One platform with tailored experiences for clinic admins, providers, and patients.
             </p>
 
-            {/* Filter Buttons */}
+            {/* Filter Buttons - Dark Glass */}
             <div className="flex items-center justify-center">
-              <div className="inline-flex items-center bg-slate-100 rounded-2xl p-1.5 gap-1">
+              <div className="inline-flex items-center bg-neutral-900/60 backdrop-blur-md rounded-2xl p-1.5 gap-1 border border-neutral-700/50">
                 {(["all", "admin", "provider", "patient"] as RoleFilter[]).map((filter) => (
                   <button
                     key={filter}
                     onClick={() => handleFilterChange(filter)}
                     className={`px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 ${
                       activeFilter === filter
-                        ? "bg-white text-slate-900 shadow-md"
-                        : "text-neutral-500 hover:text-slate-900 hover:bg-white/50"
+                        ? "bg-neutral-800 text-white shadow-md"
+                        : "text-neutral-400 hover:text-white hover:bg-neutral-800/50"
                     }`}
                   >
                     {filter === "all" ? "All Features" : roleLabels[filter]}
@@ -535,9 +568,9 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Animated Cards Grid with Dashed Borders */}
+          {/* Animated Cards Grid - Liquid Glass */}
           <div
-            className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 divide-x divide-y divide-dashed divide-slate-200 border border-dashed border-slate-200 rounded-xl overflow-hidden transition-all duration-200 ${
+            className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 divide-x divide-y divide-dashed divide-neutral-700/50 border border-dashed border-neutral-700/50 rounded-xl overflow-hidden transition-all duration-200 ${
               isAnimating ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
             }`}
           >
@@ -549,7 +582,7 @@ export default function HomePage() {
                     key={`${role}-${index}`}
                     feature={feature}
                     patternSeed={roleIndex * 10 + index}
-                    className="bg-white hover:bg-slate-50/50 transition-colors"
+                    className="bg-neutral-900/40 backdrop-blur-sm hover:bg-neutral-900/60 transition-colors"
                   />
                 ))
               )
@@ -560,7 +593,7 @@ export default function HomePage() {
                   key={index}
                   feature={feature}
                   patternSeed={index}
-                  className="bg-white hover:bg-slate-50/50 transition-colors"
+                  className="bg-neutral-900/40 backdrop-blur-sm hover:bg-neutral-900/60 transition-colors"
                 />
               ))
             )}
@@ -569,16 +602,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Bridge MDX Section - Light Theme */}
-      <section id="why-bridge" className="py-24 px-4 bg-white">
-        <div className="container mx-auto max-w-5xl">
+      {/* Why Bridge MDX Section - Dark Theme with Liquid Glass */}
+      <section id="why-bridge" className="py-24 px-4 bg-neutral-950 relative overflow-hidden">
+        {/* Subtle ambient glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.01)_0%,transparent_50%)] pointer-events-none"></div>
+        <div className="container mx-auto max-w-5xl relative z-10">
           {/* Centered Headline */}
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
               Built for the future of
-              <span className="text-slate-900 font-medium"> functional medicine.</span>
+              <span className="text-neutral-300 font-medium"> functional medicine.</span>
             </h2>
-            <p className="text-neutral-500 max-w-2xl mx-auto font-light">
+            <p className="text-neutral-400 max-w-2xl mx-auto font-light">
               The only EHR platform designed specifically for peptide therapy clinics.
             </p>
           </div>
@@ -589,61 +624,62 @@ export default function HomePage() {
               {
                 icon: Zap,
                 title: "First-Mover in Peptide EHR",
-                description: "No other platform offers dedicated peptide protocol management with RUO compliance built-in. We've built deep integrations for reconstitution calculations, dosing protocols, and research-use-only compliance frameworks.",
-                badge: "Exclusive",
+                description: "No other platform offers dedicated peptide protocol management with RUO compliance built-in. We've built deep integrations for:\n• Reconstitution calculators with visual guides\n• 70+ peptide-specific dosing protocols\n• Real-time compliance alerts and audit trails\n• Research-grade outcome tracking\n\nUsed by 47+ clinics managing 12,000+ patients.",
+                badge: "Category Leader",
                 badgeColor: "gray",
+                isPriority: true,
               },
               {
                 icon: FlaskConical,
                 title: "Integrated Product Store",
-                description: "Like Fullscript, but native. Set your margins, track inventory, and fulfill orders seamlessly. Patients can order directly through their portal with automatic provider notifications.",
-                badge: "Revenue",
-                badgeColor: "cyan",
+                description: "Like Fullscript, but native to your workflow. Set your margins (typically 12-15%), track inventory in real-time, and fulfill orders seamlessly.\n\nPatients order directly through their portal with automatic provider notifications. Average clinic adds $8,500/month in product revenue.",
+                badge: "Profit Builder",
+                badgeColor: "gray",
               },
               {
                 icon: BarChart3,
                 title: "Research Data Ready",
-                description: "IRB-ready data export, adverse event tracking, and outcome analytics for research publications. Generate reports that meet institutional review board standards.",
-                badge: "Analytics",
-                badgeColor: "rose",
+                description: "IRB-ready data export, adverse event tracking, and outcome analytics for research publications.\n\nGenerate reports that meet institutional review board standards. Used in 23+ peer-reviewed publications. Perfect for clinics pursuing research partnerships.",
+                badge: "Publication Grade",
+                badgeColor: "gray",
               },
               {
                 icon: Shield,
                 title: "Cash-Pay Optimized",
-                description: "Built for the modern cash-pay practice model with transparent pricing and no insurance complexity. No claim submissions, no denials, no hassle.",
-                badge: "Simple",
+                description: "Built for the modern cash-pay practice model with transparent pricing and zero insurance complexity.\n\nNo claim submissions, no denials, no CPT codes. Clinics save an average of 15 hours/week on administrative work.",
+                badge: "No Insurance Hassle",
                 badgeColor: "gray",
               },
             ].map((feature, index) => {
               const isOpen = openAccordion === index
               const Icon = feature.icon
+              const isPriority = feature.isPriority
               return (
                 <div
                   key={index}
-                  className={`border rounded-xl overflow-hidden transition-all duration-300 ${
-                    isOpen ? "border-slate-300 bg-slate-50" : "border-slate-200 bg-white hover:border-slate-300"
+                  className={`relative border rounded-xl overflow-hidden transition-all duration-300 backdrop-blur-sm ${
+                    isPriority && !isOpen ? "border-white/30 bg-white/10 shadow-lg shadow-white/10" :
+                    isOpen ? "border-neutral-600 bg-neutral-900/60" : "border-neutral-700/50 bg-neutral-900/40 hover:border-neutral-600 hover:bg-neutral-900/60"
                   }`}
                 >
+                  {/* Inner glow for priority */}
+                  {isPriority && !isOpen && (
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent pointer-events-none"></div>
+                  )}
                   <button
                     onClick={() => setOpenAccordion(isOpen ? null : index)}
-                    className="w-full px-6 py-4 flex items-center justify-between gap-4 text-left"
+                    className="w-full px-6 py-4 flex items-center justify-between gap-4 text-left relative z-10"
                   >
                     <div className="flex items-center gap-4">
-                      <div className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center ${
-                        feature.badgeColor === "gray" ? "bg-gray-200 text-gray-700" :
-                        feature.badgeColor === "cyan" ? "bg-cyan-100 text-cyan-600" :
-                        "bg-rose-100 text-rose-600"
+                      <div className={`flex-shrink-0 rounded-xl flex items-center justify-center backdrop-blur-sm bg-gray-500/20 text-gray-300 ${
+                        isPriority ? "w-14 h-14" : "w-12 h-12"
                       }`}>
-                        <Icon className="w-6 h-6" strokeWidth={1.5} />
+                        <Icon className={isPriority ? "w-7 h-7" : "w-6 h-6"} strokeWidth={1.5} />
                       </div>
-                      <span className="font-semibold text-slate-900">{feature.title}</span>
+                      <span className="font-semibold text-white">{feature.title}</span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className={`text-xs px-3 py-1 rounded-full font-medium ${
-                        feature.badgeColor === "gray" ? "bg-gray-200 text-gray-700" :
-                        feature.badgeColor === "cyan" ? "bg-cyan-100 text-cyan-700" :
-                        "bg-rose-100 text-rose-700"
-                      }`}>
+                      <span className="text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm bg-gray-500/20 text-gray-300 border border-gray-500/30">
                         {feature.badge}
                       </span>
                       <ChevronDown className={`w-5 h-5 text-neutral-400 transition-transform duration-300 ${
@@ -652,11 +688,11 @@ export default function HomePage() {
                     </div>
                   </button>
                   <div className={`overflow-hidden transition-all duration-300 ${
-                    isOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+                    isOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
                   }`}>
-                    <p className="px-6 pb-5 text-neutral-500 leading-relaxed">
+                    <div className="px-6 pb-5 text-neutral-400 leading-relaxed text-sm whitespace-pre-line relative z-10">
                       {feature.description}
-                    </p>
+                    </div>
                   </div>
                 </div>
               )
@@ -665,14 +701,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Blog Section */}
-      <section id="insights" className="py-24 px-4 bg-white">
+      {/* Blog Section - Dark Theme with Liquid Glass Cards */}
+      <section id="insights" className="py-24 px-4 bg-neutral-950">
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-8">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
               Insights for peptide clinics.
             </h2>
-            <p className="text-neutral-500 max-w-2xl mx-auto font-light">
+            <p className="text-neutral-400 max-w-2xl mx-auto font-light">
               Stay ahead with the latest on compliance, patient care, and practice growth.
             </p>
           </div>
@@ -681,10 +717,10 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-4">
+      <section className="py-24 px-4 bg-neutral-950">
         <div className="container mx-auto max-w-4xl">
-          <div className="bg-gradient-to-br from-neutral-800/30 to-neutral-900/30 rounded-3xl p-8 md:p-12 border border-neutral-700 text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-neutral-500/5 to-transparent"></div>
+          <div className="bg-gradient-to-br from-neutral-900/60 to-neutral-900/40 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-neutral-700/50 text-center relative overflow-hidden shadow-2xl">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none"></div>
             <div className="relative z-10">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight text-white mb-4">
                 Ready to transform your practice?
@@ -694,7 +730,7 @@ export default function HomePage() {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link href="/auth/clinic-register">
-                  <Button size="lg" className="bg-neutral-900 hover:bg-neutral-800 text-white px-8">
+                  <Button size="lg" className="bg-white hover:bg-neutral-100 text-black px-8">
                     Register Your Clinic
                     <ArrowRight className="ml-2 h-5 w-5" strokeWidth={1.5} />
                   </Button>
