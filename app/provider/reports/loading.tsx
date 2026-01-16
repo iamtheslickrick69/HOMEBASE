@@ -1,3 +1,5 @@
+"use client"
+
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { Users, Activity, Calendar, ShoppingCart, BookOpen, Calculator, FileText, BarChart } from "lucide-react"
 

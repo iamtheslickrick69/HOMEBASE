@@ -1,50 +1,38 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono, Inter } from "next/font/google"
+import { Outfit } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { AuthProvider } from "@/lib/auth-context"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
-import { FloatingChatWidget } from "@/components/ui/floating-chat-widget"
 import { Suspense } from "react"
 import "./globals.css"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
-})
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-})
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 })
 
 export const metadata: Metadata = {
-  title: "Homebase | One Login. Every Portal.",
-  description: "The secure command center for every login your dental team needs. One dashboard. Every portal. No more spreadsheets, no more password chaos.",
-  generator: "v0.app",
+  title: "Homebase | The Operating System for Dental Practices",
+  description: "Credentials, AI automation, patient onboarding, and payments — all in one platform. The complete operating system for modern dental practices.",
   icons: {
-    icon: "/homebase-logo.png",
-    shortcut: "/homebase-logo.png",
-    apple: "/homebase-logo.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   openGraph: {
-    title: "Homebase | One Login. Every Portal.",
-    description: "The secure command center for every login your dental team needs. Stop hunting for passwords. Start running your practice.",
+    title: "Homebase | The Operating System for Dental Practices",
+    description: "Credentials, AI automation, patient onboarding, and payments — all in one platform. Stop juggling 15 tools. Run your entire practice from Homebase.",
     url: "https://homebase.dental",
     siteName: "Homebase",
     images: [
       {
-        url: "/homebase-logo.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Homebase - One login. Every portal.",
+        alt: "Homebase - The Operating System for Dental Practices",
       },
     ],
     locale: "en_US",
@@ -52,9 +40,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Homebase | One Login. Every Portal.",
-    description: "The secure command center for every login your dental team needs. Stop hunting for passwords. Start running your practice.",
-    images: ["/homebase-logo.png"],
+    title: "Homebase | The Operating System for Dental Practices",
+    description: "Credentials, AI automation, patient onboarding, and payments — all in one platform.",
+    images: ["/og-image.png"],
   },
 }
 
@@ -64,19 +52,22 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${inter.variable}`} suppressHydrationWarning>
-      <body className="font-sans antialiased">
+    <html lang="en" className={outfit.variable} suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
+      <body className="font-sans antialiased bg-[#0A0A0A] text-[#E5E5E5]">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <Suspense fallback={null}>
             <AuthProvider>{children}</AuthProvider>
           </Suspense>
           <Toaster />
-          <FloatingChatWidget />
         </ThemeProvider>
         <Analytics />
       </body>

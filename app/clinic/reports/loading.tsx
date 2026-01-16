@@ -1,3 +1,5 @@
+"use client"
+
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { Building2, Users, UserCog, Activity, DollarSign, BarChart, TrendingUp } from "lucide-react"
 

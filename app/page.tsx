@@ -2,204 +2,24 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { FeatureCard } from "@/components/ui/grid-feature-cards"
-import DigitalSerenity from "@/components/ui/digital-serenity-animated-landing-page"
-import BlogCardStack from "@/components/blog-card-stack"
-import { AnimatedTabs } from "@/components/ui/animated-tabs"
-import { PixelCanvas } from "@/components/ui/pixel-canvas"
-import RotatingEarth from "@/components/ui/wireframe-dotted-globe"
-import { TransitionPanel } from "@/components/ui/transition-panel"
-import { GradientWave } from "@/components/ui/gradient-wave"
-import {
-  Building2,
-  UserCog,
-  User,
-  Shield,
-  FlaskConical,
-  Calculator,
-  Phone,
-  BarChart3,
-  FileText,
-  Zap,
-  CheckCircle2,
-  ArrowRight,
-  ChevronDown,
-  Sparkles,
-  Lock,
-  Clock,
-  CreditCard,
-  MessageSquare,
-  Database,
-  Brain,
-  Share2,
-} from "lucide-react"
 import { useState, useEffect } from "react"
-
-type RoleFilter = "all" | "admin" | "provider" | "patient"
-
-const roleFeatures = {
-  admin: [
-    {
-      icon: Building2,
-      title: "Provider Management",
-      description: "Manage your team of providers, credentials, scheduling, and access permissions.",
-      badge: "Clinic",
-      badgeColor: "gray",
-    },
-    {
-      icon: BarChart3,
-      title: "Revenue Analytics",
-      description: "Track revenue streams, set margins, manage transactions, and monitor payouts.",
-      badge: "Clinic",
-      badgeColor: "gray",
-    },
-    {
-      icon: BarChart3,
-      title: "Performance Dashboard",
-      description: "Real-time insights into clinic performance, growth metrics, and KPIs.",
-      badge: "Clinic",
-      badgeColor: "gray",
-    },
-    {
-      icon: Shield,
-      title: "Compliance Settings",
-      description: "Configure RUO workflows, consent forms, video documentation, and audit trails.",
-      badge: "Clinic",
-      badgeColor: "gray",
-    },
-    {
-      icon: User,
-      title: "Patient Overview",
-      description: "Bird's-eye view of all patients across your practice with filtering and search.",
-      badge: "Clinic",
-      badgeColor: "gray",
-    },
-    {
-      icon: FlaskConical,
-      title: "Inventory Control",
-      description: "Track peptide stock levels, reorder alerts, and supplier management.",
-      badge: "Clinic",
-      badgeColor: "gray",
-    },
-  ],
-  provider: [
-    {
-      icon: FileText,
-      title: "Auto-Charting",
-      description: "Reduce documentation time by 50% with intelligent charting that captures every action.",
-      badge: "Provider",
-      badgeColor: "gray",
-    },
-    {
-      icon: FlaskConical,
-      title: "Peptide Protocols",
-      description: "70+ peptide catalog with dosing guides, reconstitution calculators, and tracking.",
-      badge: "Provider",
-      badgeColor: "gray",
-    },
-    {
-      icon: Calculator,
-      title: "Dosing Calculator",
-      description: "Interactive reconstitution calculator with visual syringe guides and saved calculations.",
-      badge: "Provider",
-      badgeColor: "gray",
-    },
-    {
-      icon: Shield,
-      title: "Treatment Protocols",
-      description: "Create, manage, and assign custom treatment protocols to patients.",
-      badge: "Provider",
-      badgeColor: "gray",
-    },
-    {
-      icon: BarChart3,
-      title: "Lab Integration",
-      description: "Order labs, view results, and track patient biomarkers over time.",
-      badge: "Provider",
-      badgeColor: "gray",
-    },
-    {
-      icon: Phone,
-      title: "Emergency Telemedicine",
-      description: "Instant patient access for safety concerns with complete audit logging.",
-      badge: "Provider",
-      badgeColor: "gray",
-    },
-  ],
-  patient: [
-    {
-      icon: BarChart3,
-      title: "Treatment Dashboard",
-      description: "View your active protocols, dosing schedule, and treatment progress.",
-      badge: "Patient",
-      badgeColor: "gray",
-    },
-    {
-      icon: FlaskConical,
-      title: "Order Peptides",
-      description: "Browse the catalog, place orders, and track shipments to your door.",
-      badge: "Patient",
-      badgeColor: "gray",
-    },
-    {
-      icon: Calculator,
-      title: "Personal Dosing Guide",
-      description: "Your reconstitution instructions with step-by-step video tutorials.",
-      badge: "Patient",
-      badgeColor: "gray",
-    },
-    {
-      icon: UserCog,
-      title: "Appointment Scheduling",
-      description: "Book visits with your provider, manage appointments, and set reminders.",
-      badge: "Patient",
-      badgeColor: "gray",
-    },
-    {
-      icon: Phone,
-      title: "Emergency Access",
-      description: "24/7 emergency telemedicine connection for urgent safety concerns.",
-      badge: "Patient",
-      badgeColor: "gray",
-    },
-    {
-      icon: CheckCircle2,
-      title: "Progress Tracking",
-      description: "Track your outcomes, log symptoms, and visualize your health journey.",
-      badge: "Patient",
-      badgeColor: "gray",
-    },
-  ],
-}
-
-const roleColors = {
-  admin: { bg: "from-gray-600 to-gray-700", accent: "gray", badge: "bg-gray-500/20 text-gray-400 border-gray-500/30" },
-  provider: { bg: "from-blue-500 to-blue-600", accent: "blue", badge: "bg-blue-500/20 text-blue-400 border-blue-500/30" },
-  patient: { bg: "from-red-500 to-red-600", accent: "red", badge: "bg-red-500/20 text-red-400 border-red-500/30" },
-}
-
-const roleLabels = {
-  admin: "Clinic",
-  provider: "Provider",
-  patient: "Patient",
-}
+import {
+  Lock,
+  Key,
+  Users,
+  CreditCard,
+  UserPlus,
+  CheckSquare,
+  Calendar,
+  FileText,
+  DollarSign,
+  Check,
+  Bot,
+  ShieldCheck,
+} from "lucide-react"
 
 export default function HomePage() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [activeFilter, setActiveFilter] = useState<RoleFilter>("all")
-  const [isAnimating, setIsAnimating] = useState(false)
-  const [openAccordion, setOpenAccordion] = useState<number | null>(0)
-  const [atlasActiveIndex, setAtlasActiveIndex] = useState(0)
-
-  const handleFilterChange = (filter: RoleFilter) => {
-    if (filter === activeFilter) return
-    setIsAnimating(true)
-    setTimeout(() => {
-      setActiveFilter(filter)
-      setTimeout(() => setIsAnimating(false), 50)
-    }, 200)
-  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -217,562 +37,996 @@ export default function HomePage() {
   }
 
   return (
-    <DigitalSerenity>
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 py-4 px-6">
-        <div className="max-w-3xl mx-auto">
-          <div className="flex items-center justify-between bg-white/95 backdrop-blur-md rounded-2xl px-4 py-3 border border-gray-200 shadow-sm">
-            {/* Logo */}
-            <Link href="/" className="flex items-center">
-              <Image
-                src="/homebase-logo.png"
-                alt="Homebase"
-                width={240}
-                height={48}
-                className="h-9 md:h-10 w-auto"
-                priority
-              />
-            </Link>
+    <div className="min-h-screen">
+      {/* Dot Grid Background */}
+      <div className="dot-grid" />
 
-            {/* Navigation */}
-            <nav className="hidden md:flex items-center gap-1">
+      {/* Navigation */}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300 ${
+          isScrolled ? "bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-[#262626]" : ""
+        }`}
+      >
+        <div className="max-w-[1200px] mx-auto px-6 flex items-center justify-between">
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/homebase-logo.png"
+              alt="Homebase"
+              width={160}
+              height={40}
+              className="h-8 w-auto"
+              priority
+            />
+          </Link>
+
+          <ul className="hidden md:flex items-center gap-8">
+            <li>
               <button
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="px-5 py-2 rounded-xl bg-gray-900 text-white font-medium text-sm transition-all"
+                onClick={() => scrollToSection("platform")}
+                className="text-[#A3A3A3] hover:text-white font-medium text-sm transition-colors"
               >
-                Home
+                Platform
               </button>
+            </li>
+            <li>
               <button
                 onClick={() => scrollToSection("features")}
-                className="px-5 py-2 rounded-xl text-gray-600 hover:text-gray-900 font-medium text-sm transition-all hover:bg-gray-100"
+                className="text-[#A3A3A3] hover:text-white font-medium text-sm transition-colors"
               >
                 Features
               </button>
+            </li>
+            <li>
               <button
-                onClick={() => scrollToSection("why-homebase")}
-                className="px-5 py-2 rounded-xl text-gray-600 hover:text-gray-900 font-medium text-sm transition-all hover:bg-gray-100"
+                onClick={() => scrollToSection("pricing")}
+                className="text-[#A3A3A3] hover:text-white font-medium text-sm transition-colors"
               >
-                About
+                Pricing
               </button>
-            </nav>
+            </li>
+            <li>
+              <button
+                onClick={() => scrollToSection("security")}
+                className="text-[#A3A3A3] hover:text-white font-medium text-sm transition-colors"
+              >
+                Security
+              </button>
+            </li>
+          </ul>
 
-            {/* CTA Buttons */}
-            <div className="flex items-center gap-3">
-              <Link href="/auth/clinic-login">
-                <Button variant="ghost" className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 px-4 font-medium text-sm">
-                  Sign In
-                </Button>
-              </Link>
-              <Link href="/auth/clinic-register">
-                <Button className="bg-gray-900 hover:bg-gray-800 text-white rounded-xl px-5 font-medium text-sm">
-                  Get Started
-                </Button>
-              </Link>
-            </div>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/auth/clinic-login"
+              className="px-4 py-2 text-[#D4D4D4] hover:text-white border border-[#404040] hover:border-[#525252] hover:bg-[#1A1A1A] rounded-xl font-medium text-sm transition-all"
+            >
+              Login
+            </Link>
+            <Link
+              href="#demo"
+              className="px-5 py-2 bg-gradient-to-r from-[#00B4D8] to-[#8B5CF6] text-white rounded-xl font-semibold text-sm shadow-[0_0_20px_rgba(0,180,216,0.25)] hover:shadow-[0_0_40px_rgba(0,180,216,0.25)] hover:-translate-y-0.5 transition-all"
+            >
+              Get a Demo
+            </Link>
           </div>
         </div>
-      </header>
+      </nav>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col justify-center items-center px-4 pt-24 pb-8">
-        <div className="text-center max-w-5xl mx-auto mb-8">
-          {/* Main headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extralight text-gray-900 mb-5 leading-[1.1] tracking-tight">
-            <span className="word-animate" data-delay="200">#1 AI Powered Solution</span>
-            <br />
-            <span className="word-animate text-gray-500" data-delay="500">for Healthcare</span>
-          </h1>
+      <section className="min-h-screen flex items-center pt-[120px] pb-20 relative overflow-hidden">
+        {/* Background Glows */}
+        <div className="absolute -top-1/2 -left-[20%] w-[80%] h-full bg-[radial-gradient(circle,rgba(0,180,216,0.25)_0%,transparent_60%)] opacity-40 pointer-events-none" />
+        <div className="absolute -bottom-[30%] -right-[20%] w-[60%] h-[80%] bg-[radial-gradient(circle,rgba(139,92,246,0.25)_0%,transparent_60%)] opacity-30 pointer-events-none" />
 
-          {/* Subtitle */}
-          <p className="word-animate text-base sm:text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed font-light" data-delay="800">
-            Empowering clinics and patients to safely store their personal data and accurately understand it.
-          </p>
-
-          </div>
-
-        {/* Two Cards: Member Login + Start Clinic */}
-        <div
-          className="w-full max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10"
-          style={{ opacity: 0, animation: 'word-appear 0.8s ease-out forwards', animationDelay: '1.2s' }}
-        >
-          {/* Left Card: Member Login - Light Glass */}
-          <div className="relative p-6 bg-white/80 backdrop-blur-xl flex flex-col rounded-xl shadow-xl border border-gray-200">
-            {/* Inner glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 to-transparent pointer-events-none rounded-xl"></div>
-
-            {/* Horizontal Header Row */}
-            <div className="flex items-center justify-between mb-3 relative z-10">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-gray-100 backdrop-blur-sm flex items-center justify-center border border-gray-200">
-                  <User className="w-4 h-4 text-gray-600" strokeWidth={1.5} />
-                </div>
-                <h3 className="text-sm font-semibold text-gray-900">Member Login</h3>
-              </div>
-              <span className="text-[10px] px-2 py-1 rounded-full font-medium bg-gray-100 backdrop-blur-sm text-gray-600 border border-gray-200">Secure</span>
+        <div className="max-w-[1200px] mx-auto px-6 relative z-10">
+          <div className="max-w-[800px]">
+            {/* Eyebrow */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[rgba(0,180,216,0.1)] to-[rgba(139,92,246,0.1)] border border-[rgba(0,180,216,0.2)] rounded-full text-sm text-[#00B4D8] mb-6">
+              <span className="w-2 h-2 bg-[#22C55E] rounded-full pulse" />
+              The Operating System for Dental Practices
             </div>
-            <p className="text-gray-500 text-xs mb-4 leading-relaxed relative z-10">
-              Access your dashboard based on your role.
+
+            {/* Headline */}
+            <h1 className="text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold text-white leading-[1.1] mb-6">
+              One platform.
+              <br />
+              <span className="gradient-text">Infinite possibilities.</span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-xl text-[#A3A3A3] max-w-[600px] mb-10 leading-relaxed">
+              Credentials, AI automation, patient onboarding, and payments — all in one place. Stop
+              juggling 15 tools. Run your entire practice from Homebase.
             </p>
-            <div className="relative z-10 flex-1">
-              <AnimatedTabs className="w-full" />
-            </div>
-          </div>
-
-          {/* Right Card: Start Your Clinic - Light Glass */}
-          <div className="relative p-6 bg-white/80 backdrop-blur-xl flex flex-col rounded-xl shadow-xl border border-gray-200">
-            {/* Inner glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 via-transparent to-transparent pointer-events-none rounded-xl"></div>
-
-            {/* Horizontal Header Row */}
-            <div className="flex items-center justify-between mb-3 relative z-10">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-gray-100 backdrop-blur-sm flex items-center justify-center border border-gray-200">
-                  <Zap className="w-4 h-4 text-gray-700" strokeWidth={1.5} />
-                </div>
-                <h3 className="text-sm font-semibold text-gray-900">Start Your Clinic</h3>
-              </div>
-              <span className="text-[10px] px-2 py-1 rounded-full font-medium bg-gray-100 backdrop-blur-sm text-gray-700 border border-gray-200">Free Trial</span>
-            </div>
-            <p className="text-gray-500 text-xs mb-4 leading-relaxed relative z-10">
-              The only peptide therapy EHR with built-in AI intelligence.
-            </p>
-
-            {/* Trust Badges - 2x2 Grid */}
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4 relative z-10">
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-green-600" strokeWidth={2} />
-                <span className="text-xs text-gray-700">HIPAA Compliant</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-green-600" strokeWidth={2} />
-                <span className="text-xs text-gray-700">70+ Protocols</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-green-600" strokeWidth={2} />
-                <span className="text-xs text-gray-700">AI-Powered</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-green-600" strokeWidth={2} />
-                <span className="text-xs text-gray-700">14-Day Free Trial</span>
-              </div>
-            </div>
-
-            {/* What's Included */}
-            <div className="border-t border-dashed border-gray-300 pt-4 mb-4 relative z-10">
-              <p className="text-[10px] uppercase tracking-wider text-gray-500 mb-2">Includes</p>
-              <div className="flex flex-wrap gap-1.5">
-                <span className="text-[10px] px-2 py-1 rounded bg-gray-100 text-gray-600">Provider Portal</span>
-                <span className="text-[10px] px-2 py-1 rounded bg-gray-100 text-gray-600">Patient App</span>
-                <span className="text-[10px] px-2 py-1 rounded bg-gray-100 text-gray-600">Analytics</span>
-                <span className="text-[10px] px-2 py-1 rounded bg-gray-100 text-gray-600">Dosing Calculator</span>
-                <span className="text-[10px] px-2 py-1 rounded bg-gray-100 text-gray-600">Product Store</span>
-              </div>
-            </div>
 
             {/* CTA Buttons */}
-            <div className="flex gap-2 mt-auto relative z-10">
-              <Link href="/auth/clinic-register" className="flex-1">
-                <Button size="default" className="w-full bg-gray-900 hover:bg-gray-800 text-white rounded-lg shadow-lg transition-all">
-                  Get Started
-                  <ArrowRight className="ml-2 h-4 w-4" strokeWidth={2} />
-                </Button>
+            <div className="flex flex-wrap gap-4 mb-12">
+              <Link
+                href="#demo"
+                className="btn btn-primary btn-large"
+              >
+                Schedule a Demo
+                <span className="ml-1">&rarr;</span>
               </Link>
               <button
-                onClick={() => scrollToSection("features")}
-                className="px-3 text-gray-500 text-xs font-medium hover:text-gray-900 transition-colors"
+                onClick={() => scrollToSection("platform")}
+                className="btn btn-secondary btn-large"
               >
-                Learn More
+                See the Platform
               </button>
             </div>
-          </div>
-        </div>
 
-        {/* Scroll indicator */}
-        <button
-          onClick={() => scrollToSection("atlas-section")}
-          className="text-gray-400 hover:text-gray-600 transition-colors animate-bounce"
-        >
-          <ChevronDown className="h-8 w-8" strokeWidth={1.5} />
-        </button>
-      </section>
-
-      {/* Atlas AI Section - Hero Globe Background */}
-      <section id="atlas-section" className="py-24 px-4 relative overflow-hidden min-h-[900px] flex items-center bg-gray-50">
-        {/* Gradient Wave Background - Behind everything */}
-        <GradientWave
-          colors={["#e0f2fe", "#ffffff", "#e0f2fe", "#ffffff", "#e0f2fe", "#ffffff"]}
-          className="opacity-30"
-          noiseSpeed={0.00001}
-          shadowPower={5}
-          darkenTop={false}
-        />
-
-        {/* MASSIVE Globe Background */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-          <div className="opacity-10">
-            <RotatingEarth width={700} height={700} className="w-[700px] h-[700px]" />
-          </div>
-        </div>
-
-        {/* Subtle ambient glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.02)_0%,transparent_70%)] z-20 pointer-events-none"></div>
-
-        <div className="container mx-auto max-w-4xl relative z-30">
-          {/* Header - Centered */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-gray-200 mb-4 backdrop-blur-sm shadow-sm">
-              <Sparkles className="h-4 w-4 text-gray-700" strokeWidth={1.5} />
-              <span className="text-sm font-medium text-gray-700">Introducing Atlas AI</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-extralight text-gray-900 mb-2 tracking-tight">
-              Intelligence That's Yours
-            </h2>
-            <p className="text-gray-700 text-lg font-medium mb-3">
-              Map out your health
-            </p>
-            <p className="text-gray-500 text-base max-w-xl mx-auto font-light">
-              Powered by your data. Protected by design. Perfected for you.
-            </p>
-          </div>
-
-          {/* Icon Pills - Floating with Backdrop Blur */}
-          <div className="flex items-center justify-center gap-3 mb-10">
-            {[
-              { icon: Database, title: 'Your Data Diamond', desc: 'Military-grade encryption. Zero sharing. Complete ownership.' },
-              { icon: Brain, title: 'Personalized Predictions', desc: 'AI learns YOUR body—not population averages.' },
-              { icon: BarChart3, title: 'Treatment Timeline', desc: 'Track peptide cycles and optimal dosing windows.' },
-              { icon: Share2, title: 'Share on YOUR Terms', desc: 'Export, share, or delete anytime. You control it all.' },
-              { icon: MessageSquare, title: 'Atlas AI', desc: 'Your personal AI assistant trained on peptide therapy protocols and research.' },
-            ].map((feature, index) => {
-              const Icon = feature.icon
-              const isActive = atlasActiveIndex === index
-              return (
-                <button
-                  key={index}
-                  onClick={() => setAtlasActiveIndex(index)}
-                  className={`group relative w-14 h-14 rounded-xl border transition-all duration-200 backdrop-blur-md ${
-                    isActive
-                      ? 'bg-gray-900 border-gray-900 scale-110 shadow-lg'
-                      : 'bg-white/80 border-gray-200 hover:border-gray-400 hover:scale-105'
-                  }`}
-                  title={feature.title}
-                >
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Icon className={`w-6 h-6 ${isActive ? 'text-white' : 'text-gray-600'}`} strokeWidth={1.5} />
-                  </div>
-                  <span className={`absolute -top-1 -right-1 w-5 h-5 rounded-full text-xs font-bold flex items-center justify-center ${
-                    isActive ? 'bg-white text-gray-900 shadow-md' : 'bg-gray-100 text-gray-500'
-                  }`}>
-                    {index + 1}
-                  </span>
-                </button>
-              )
-            })}
-          </div>
-
-          {/* Enhanced Feature Card with Glass Effect */}
-          <TransitionPanel
-            activeIndex={atlasActiveIndex}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
-            variants={{
-              enter: { opacity: 0, y: 10 },
-              center: { opacity: 1, y: 0 },
-              exit: { opacity: 0, y: -10 },
-            }}
-            className="mb-12"
-          >
-            {[
-              { icon: Database, title: 'Your Data Diamond', desc: 'Military-grade encryption. Zero sharing. Complete ownership.' },
-              { icon: Brain, title: 'Personalized Predictions', desc: 'AI learns YOUR body—not population averages.' },
-              { icon: BarChart3, title: 'Treatment Timeline', desc: 'Track peptide cycles and optimal dosing windows.' },
-              { icon: Share2, title: 'Share on YOUR Terms', desc: 'Export, share, or delete anytime. You control it all.' },
-              { icon: MessageSquare, title: 'Atlas AI', desc: 'Your personal AI assistant trained on peptide therapy protocols and research.' },
-            ].map((feature, index) => {
-              const Icon = feature.icon
-              return (
-                <div key={index} className="flex items-center gap-4 px-6 py-5 rounded-xl bg-white/90 backdrop-blur-md border border-dashed border-gray-300 max-w-2xl mx-auto shadow-lg">
-                  <div className="w-14 h-14 rounded-xl bg-gray-100 flex items-center justify-center flex-shrink-0 border border-gray-200">
-                    <Icon className="w-7 h-7 text-gray-700" strokeWidth={1.5} />
-                  </div>
-                  <div>
-                    <h3 className="text-gray-900 font-semibold mb-1 text-lg">{feature.title}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">{feature.desc}</p>
-                  </div>
+            {/* Stats */}
+            <div className="flex flex-wrap gap-12">
+              <div>
+                <div className="text-3xl font-bold text-white">
+                  <span className="text-[#00B4D8]">$40K</span>+
                 </div>
-              )
-            })}
-          </TransitionPanel>
-
-          {/* Stats - Glass Morphism Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
-            <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white/90 backdrop-blur-md border border-gray-200 shadow-md">
-              <Lock className="w-4 h-4 text-gray-700" strokeWidth={1.5} />
-              <div className="text-2xl font-bold text-gray-900">100%</div>
-              <div className="text-xs text-gray-500">Data Ownership</div>
+                <div className="text-sm text-[#737373]">Saved per year in denied claims</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-white">
+                  <span className="text-[#00B4D8]">70%</span>
+                </div>
+                <div className="text-sm text-[#737373]">Reduction in manual work</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-white">
+                  <span className="text-[#00B4D8]">30</span> min
+                </div>
+                <div className="text-sm text-[#737373]">Setup time</div>
+              </div>
             </div>
-            <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white/90 backdrop-blur-md border border-gray-200 shadow-md">
-              <Shield className="w-4 h-4 text-gray-700" strokeWidth={1.5} />
-              <div className="text-2xl font-bold text-gray-900">0</div>
-              <div className="text-xs text-gray-500">Third-Party Sharing</div>
-            </div>
-            <div className="flex items-center gap-3 px-5 py-3 rounded-xl bg-white/90 backdrop-blur-md border border-gray-200 shadow-md">
-              <Lock className="w-4 h-4 text-gray-700" strokeWidth={1.5} />
-              <div className="text-2xl font-bold text-gray-900">256-bit</div>
-              <div className="text-xs text-gray-500">Encryption + HIPAA++</div>
-            </div>
-          </div>
-
-          {/* CTA with Pulsing Glow */}
-          <div className="text-center">
-            <button
-              onClick={() => window.dispatchEvent(new CustomEvent("open-chat-widget"))}
-              className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gray-900 hover:bg-gray-800 text-white font-semibold transition-all hover:scale-105 shadow-xl"
-            >
-              <span className="relative">Experience Atlas AI</span>
-              <ArrowRight className="relative w-4 h-4 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
-            </button>
           </div>
         </div>
       </section>
 
-      {/* Features Section - Light Theme */}
-      <section id="features" className="py-24 px-4 bg-white relative overflow-hidden">
-        {/* Subtle ambient glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(0,0,0,0.02)_0%,transparent_60%)] pointer-events-none"></div>
-        <div className="container mx-auto max-w-5xl relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
-              Powerful tools for every role.
-            </h2>
-            <p className="text-gray-500 max-w-2xl mx-auto font-light mb-8">
-              One platform with tailored experiences for clinic admins, providers, and patients.
-            </p>
+      {/* Trusted By Section */}
+      <section className="py-[60px] border-t border-b border-[#262626] bg-[#111111]">
+        <div className="max-w-[1200px] mx-auto px-6">
+          <p className="text-center text-[#737373] text-xs uppercase tracking-[2px] mb-8">
+            Trusted by practices using
+          </p>
+          <div className="flex justify-center items-center gap-12 flex-wrap opacity-60">
+            <span className="text-2xl font-bold text-[#A3A3A3]">Dentrix</span>
+            <span className="text-2xl font-bold text-[#A3A3A3]">Eaglesoft</span>
+            <span className="text-2xl font-bold text-[#A3A3A3]">OpenDental</span>
+            <span className="text-2xl font-bold text-[#A3A3A3]">Curve Dental</span>
+            <span className="text-2xl font-bold text-[#A3A3A3]">Carestack</span>
+          </div>
+        </div>
+      </section>
 
-            {/* Filter Buttons - Light Glass */}
-            <div className="flex items-center justify-center">
-              <div className="inline-flex items-center bg-gray-100/80 backdrop-blur-md rounded-2xl p-1.5 gap-1 border border-gray-200">
-                {(["all", "admin", "provider", "patient"] as RoleFilter[]).map((filter) => (
-                  <button
-                    key={filter}
-                    onClick={() => handleFilterChange(filter)}
-                    className={`px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 ${
-                      activeFilter === filter
-                        ? "bg-white text-gray-900 shadow-md"
-                        : "text-gray-500 hover:text-gray-900 hover:bg-white/50"
-                    }`}
+      {/* Platform Overview */}
+      <section id="platform" className="py-[120px] relative">
+        <div className="max-w-[1200px] mx-auto px-6">
+          <div className="text-center mb-20">
+            <span className="section-eyebrow">The Platform</span>
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-white mb-4">
+              Everything your practice needs. Nothing it doesn&apos;t.
+            </h2>
+            <p className="text-lg text-[#A3A3A3] max-w-[600px] mx-auto">
+              Four powerful modules that work together seamlessly — or use just what you need.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Credentials Card */}
+            <div className="card-dark p-10 relative overflow-hidden platform-card-blue">
+              <div className="w-14 h-14 rounded-xl bg-[rgba(0,180,216,0.1)] flex items-center justify-center mb-6">
+                <Lock className="w-7 h-7 text-[#00B4D8]" />
+              </div>
+              <h3 className="text-2xl font-semibold text-white mb-3">Credentials & 2FA</h3>
+              <p className="text-[#A3A3A3] mb-6 leading-relaxed">
+                End password chaos forever. One vault for all your logins, with centralized 2FA codes
+                your entire team can access.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  "350+ insurance portal integrations",
+                  "SMS/Email 2FA capture & routing",
+                  "One-click employee offboarding",
+                  "Complete audit trail",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2.5 text-[#D4D4D4] text-[0.95rem]">
+                    <Check className="w-[18px] h-[18px] text-[#00B4D8] flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* AI Automation Card */}
+            <div className="card-dark p-10 relative overflow-hidden platform-card-purple">
+              <div className="w-14 h-14 rounded-xl bg-[rgba(139,92,246,0.1)] flex items-center justify-center mb-6">
+                <Bot className="w-7 h-7 text-[#8B5CF6]" />
+              </div>
+              <h3 className="text-2xl font-semibold text-white mb-3">AI Automation</h3>
+              <p className="text-[#A3A3A3] mb-6 leading-relaxed">
+                Let AI handle the busy work. Auto-generate invoices, submit insurance claims, and
+                follow up on unpaid balances.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  "Automated patient invoicing",
+                  "Insurance claim submission",
+                  "Payment reconciliation",
+                  "Denial management",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2.5 text-[#D4D4D4] text-[0.95rem]">
+                    <Check className="w-[18px] h-[18px] text-[#8B5CF6] flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Patient Onboarding Card */}
+            <div className="card-dark p-10 relative overflow-hidden platform-card-green">
+              <div className="w-14 h-14 rounded-xl bg-[rgba(34,197,94,0.1)] flex items-center justify-center mb-6">
+                <UserPlus className="w-7 h-7 text-[#22C55E]" />
+              </div>
+              <h3 className="text-2xl font-semibold text-white mb-3">Patient Onboarding</h3>
+              <p className="text-[#A3A3A3] mb-6 leading-relaxed">
+                Ditch the clipboard. Gamified intake forms patients actually complete — via SMS or
+                email, before they arrive.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  "Mobile-first, SMS-triggered forms",
+                  "Gamified progress & rewards",
+                  "Auto-verify insurance eligibility",
+                  "Data accuracy verification",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2.5 text-[#D4D4D4] text-[0.95rem]">
+                    <Check className="w-[18px] h-[18px] text-[#22C55E] flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Payments Card */}
+            <div className="card-dark p-10 relative overflow-hidden platform-card-red">
+              <div className="w-14 h-14 rounded-xl bg-[rgba(239,68,68,0.1)] flex items-center justify-center mb-6">
+                <CreditCard className="w-7 h-7 text-[#EF4444]" />
+              </div>
+              <h3 className="text-2xl font-semibold text-white mb-3">Payments</h3>
+              <p className="text-[#A3A3A3] mb-6 leading-relaxed">
+                Collect payments faster with integrated processing. Patient payments, insurance
+                reimbursements — all in one place.
+              </p>
+              <ul className="space-y-3">
+                {[
+                  "One-click patient payments",
+                  "Insurance ERA processing",
+                  "Payment plans & financing",
+                  "Real-time reporting",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2.5 text-[#D4D4D4] text-[0.95rem]">
+                    <Check className="w-[18px] h-[18px] text-[#EF4444] flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Flow Section */}
+      <section className="py-[120px] bg-[#111111] relative overflow-hidden">
+        <div className="max-w-[1200px] mx-auto px-6">
+          <div className="text-center mb-20">
+            <span className="section-eyebrow">The Complete Lifecycle</span>
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-white mb-4">
+              From sign-up to payment. We&apos;ve got it all.
+            </h2>
+            <p className="text-lg text-[#A3A3A3] max-w-[600px] mx-auto">
+              Homebase manages every step of the patient revenue cycle.
+            </p>
+          </div>
+
+          <div className="relative mt-[60px]">
+            {/* Flow Line */}
+            <div className="hidden lg:block absolute top-1/2 left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-[#00B4D8] via-[#8B5CF6] to-[#EF4444]" />
+
+            {/* Flow Steps */}
+            <div className="flex flex-wrap lg:flex-nowrap justify-between gap-8 relative z-10">
+              {[
+                {
+                  icon: UserPlus,
+                  title: "Patient Signs Up",
+                  desc: "Gamified intake via SMS/email",
+                  color: "#00B4D8",
+                },
+                {
+                  icon: CheckSquare,
+                  title: "Data Verified",
+                  desc: "Auto-check insurance & info",
+                  color: "#22C55E",
+                },
+                {
+                  icon: Calendar,
+                  title: "Appointment",
+                  desc: "Seamless check-in & access",
+                  color: "#8B5CF6",
+                },
+                {
+                  icon: FileText,
+                  title: "Claim Filed",
+                  desc: "AI submits to insurance",
+                  color: "#FBBF24",
+                },
+                {
+                  icon: DollarSign,
+                  title: "Payment",
+                  desc: "Collected via PayPro",
+                  color: "#EF4444",
+                },
+              ].map((step, i) => (
+                <div key={i} className="flex-1 text-center min-w-[150px]">
+                  <div
+                    className="w-20 h-20 bg-[#0A0A0A] border-2 border-[#404040] rounded-full flex items-center justify-center mx-auto mb-5 transition-all duration-300 hover:scale-110 hover:border-current"
+                    style={{ color: step.color }}
                   >
-                    {filter === "all" ? "All Features" : roleLabels[filter]}
-                  </button>
+                    <step.icon className="w-8 h-8" />
+                  </div>
+                  <h4 className="text-white font-semibold mb-2">{step.title}</h4>
+                  <p className="text-[#737373] text-sm max-w-[150px] mx-auto">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Feature Deep Dives */}
+      <section id="features" className="py-[120px]">
+        <div className="max-w-[1200px] mx-auto px-6">
+          {/* Gamified Onboarding Feature */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-[120px]">
+            <div>
+              <span className="section-eyebrow">Patient Onboarding</span>
+              <h3 className="text-[2rem] font-bold text-white mb-4">
+                Patients actually complete their forms. Really.
+              </h3>
+              <p className="text-[#A3A3A3] text-lg leading-relaxed mb-8">
+                No more clipboards. No more illegible handwriting. No more &quot;we didn&apos;t get your
+                insurance card.&quot; Homebase sends a text, patients tap through a beautiful mobile
+                experience, and arrive ready to be seen.
+              </p>
+
+              <div className="grid grid-cols-3 gap-6 mb-8">
+                {[
+                  { value: "94%", label: "Completion rate" },
+                  { value: "3 min", label: "Avg. time to complete" },
+                  { value: "0", label: "Paper forms needed" },
+                ].map((stat, i) => (
+                  <div
+                    key={i}
+                    className="bg-[#1A1A1A] border border-[#262626] rounded-xl p-5 text-center"
+                  >
+                    <div className="text-2xl font-bold text-[#00B4D8] mb-1">{stat.value}</div>
+                    <div className="text-xs text-[#737373]">{stat.label}</div>
+                  </div>
                 ))}
               </div>
+
+              <Link href="#demo" className="btn btn-primary">
+                See It In Action
+              </Link>
             </div>
-          </div>
 
-          {/* Animated Cards Grid - Light Glass */}
-          <div
-            className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 divide-x divide-y divide-dashed divide-gray-200 border border-dashed border-gray-200 rounded-xl overflow-hidden transition-all duration-200 ${
-              isAnimating ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
-            }`}
-          >
-            {activeFilter === "all" ? (
-              // Show all features with role badges (2 from each role)
-              (["admin", "provider", "patient"] as const).flatMap((role, roleIndex) =>
-                roleFeatures[role].slice(0, 2).map((feature, index) => (
-                  <FeatureCard
-                    key={`${role}-${index}`}
-                    feature={feature}
-                    patternSeed={roleIndex * 10 + index}
-                    className="bg-white/80 backdrop-blur-sm hover:bg-gray-50 transition-colors"
-                  />
-                ))
-              )
-            ) : (
-              // Show role-specific features
-              roleFeatures[activeFilter].map((feature, index) => (
-                <FeatureCard
-                  key={index}
-                  feature={feature}
-                  patternSeed={index}
-                  className="bg-white/80 backdrop-blur-sm hover:bg-gray-50 transition-colors"
-                />
-              ))
-            )}
-          </div>
-
-        </div>
-      </section>
-
-      {/* Why Homebase Section - Light Theme */}
-      <section id="why-homebase" className="py-24 px-4 bg-gray-50 relative overflow-hidden">
-        {/* Subtle ambient glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(0,0,0,0.02)_0%,transparent_50%)] pointer-events-none"></div>
-        <div className="container mx-auto max-w-5xl relative z-10">
-          {/* Centered Headline */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
-              Built for the future of
-              <span className="text-gray-500 font-medium"> functional medicine.</span>
-            </h2>
-            <p className="text-gray-500 max-w-2xl mx-auto font-light">
-              The only EHR platform designed specifically for peptide therapy clinics.
-            </p>
-          </div>
-
-          {/* Feature Accordion */}
-          <div className="max-w-2xl mx-auto space-y-3">
-            {[
-              {
-                icon: Zap,
-                title: "First-Mover in Peptide EHR",
-                description: "No other platform offers dedicated peptide protocol management with RUO compliance built-in. We've built deep integrations for:\n• Reconstitution calculators with visual guides\n• 70+ peptide-specific dosing protocols\n• Real-time compliance alerts and audit trails\n• Research-grade outcome tracking\n\nUsed by 47+ clinics managing 12,000+ patients.",
-                badge: "Category Leader",
-                badgeColor: "gray",
-                isPriority: true,
-              },
-              {
-                icon: FlaskConical,
-                title: "Integrated Product Store",
-                description: "Like Fullscript, but native to your workflow. Set your margins (typically 12-15%), track inventory in real-time, and fulfill orders seamlessly.\n\nPatients order directly through their portal with automatic provider notifications. Average clinic adds $8,500/month in product revenue.",
-                badge: "Profit Builder",
-                badgeColor: "gray",
-              },
-              {
-                icon: BarChart3,
-                title: "Research Data Ready",
-                description: "IRB-ready data export, adverse event tracking, and outcome analytics for research publications.\n\nGenerate reports that meet institutional review board standards. Used in 23+ peer-reviewed publications. Perfect for clinics pursuing research partnerships.",
-                badge: "Publication Grade",
-                badgeColor: "gray",
-              },
-              {
-                icon: Shield,
-                title: "Cash-Pay Optimized",
-                description: "Built for the modern cash-pay practice model with transparent pricing and zero insurance complexity.\n\nNo claim submissions, no denials, no CPT codes. Clinics save an average of 15 hours/week on administrative work.",
-                badge: "No Insurance Hassle",
-                badgeColor: "gray",
-              },
-            ].map((feature, index) => {
-              const isOpen = openAccordion === index
-              const Icon = feature.icon
-              const isPriority = feature.isPriority
-              return (
-                <div
-                  key={index}
-                  className={`relative border rounded-xl overflow-hidden transition-all duration-300 backdrop-blur-sm ${
-                    isPriority && !isOpen ? "border-gray-400 bg-white shadow-lg" :
-                    isOpen ? "border-gray-300 bg-white" : "border-gray-200 bg-white/80 hover:border-gray-300 hover:bg-white"
-                  }`}
-                >
-                  {/* Inner glow for priority */}
-                  {isPriority && !isOpen && (
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-100/50 to-transparent pointer-events-none"></div>
-                  )}
-                  <button
-                    onClick={() => setOpenAccordion(isOpen ? null : index)}
-                    className="w-full px-6 py-4 flex items-center justify-between gap-4 text-left relative z-10"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className={`flex-shrink-0 rounded-xl flex items-center justify-center backdrop-blur-sm bg-gray-100 text-gray-700 ${
-                        isPriority ? "w-14 h-14" : "w-12 h-12"
-                      }`}>
-                        <Icon className={isPriority ? "w-7 h-7" : "w-6 h-6"} strokeWidth={1.5} />
-                      </div>
-                      <span className="font-semibold text-gray-900">{feature.title}</span>
+            {/* Phone Mockup */}
+            <div className="bg-[#111111] border border-[#262626] rounded-3xl p-8">
+              <div className="max-w-[320px] mx-auto">
+                <div className="bg-[#0A0A0A] border-[3px] border-[#404040] rounded-[32px] p-3 relative">
+                  <div className="w-[120px] h-7 bg-[#0A0A0A] rounded-b-2xl absolute top-0 left-1/2 -translate-x-1/2 z-10" />
+                  <div className="bg-[#1A1A1A] rounded-3xl pt-12 pb-5 px-5 min-h-[500px]">
+                    {/* Progress Dots */}
+                    <div className="flex gap-2 mb-8">
+                      {[1, 2, 3, 4, 5].map((_, i) => (
+                        <div
+                          key={i}
+                          className={`flex-1 h-1 rounded-sm ${
+                            i < 2 ? "bg-[#00B4D8]" : i === 2 ? "bg-[#22C55E]" : "bg-[#404040]"
+                          }`}
+                        />
+                      ))}
                     </div>
-                    <div className="flex items-center gap-3">
-                      <span className="text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm bg-gray-100 text-gray-700 border border-gray-200">
-                        {feature.badge}
-                      </span>
-                      <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${
-                        isOpen ? "rotate-180" : ""
-                      }`} />
+
+                    <div className="text-6xl text-center mb-6">&#129463;</div>
+                    <div className="text-white text-xl font-semibold text-center mb-2">
+                      Almost there!
                     </div>
-                  </button>
-                  <div className={`overflow-hidden transition-all duration-300 ${
-                    isOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
-                  }`}>
-                    <div className="px-6 pb-5 text-gray-500 leading-relaxed text-sm whitespace-pre-line relative z-10">
-                      {feature.description}
+                    <div className="text-[#A3A3A3] text-sm text-center mb-8">
+                      Just a few more details...
+                    </div>
+
+                    {/* Form Fields */}
+                    <div className="space-y-3">
+                      {[
+                        { completed: true, text: "John Smith" },
+                        { completed: true, text: "Delta Dental PPO" },
+                        { completed: false, text: "Medical history..." },
+                      ].map((field, i) => (
+                        <div
+                          key={i}
+                          className={`flex items-center gap-3 p-3.5 rounded-xl border ${
+                            field.completed
+                              ? "border-[#22C55E] bg-[rgba(34,197,94,0.05)]"
+                              : "border-[#404040] bg-[#111111]"
+                          }`}
+                        >
+                          {field.completed ? (
+                            <Check className="w-5 h-5 text-[#22C55E]" />
+                          ) : (
+                            <div className="w-5 h-5 border border-[#737373] rounded" />
+                          )}
+                          <span
+                            className={field.completed ? "text-white" : "text-[#A3A3A3]"}
+                          >
+                            {field.text}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <button className="w-full mt-6 py-4 bg-gradient-to-r from-[#00B4D8] to-[#8B5CF6] text-white font-semibold rounded-xl">
+                      Continue &rarr;
+                    </button>
+
+                    <div className="text-center mt-5 text-[#FBBF24] font-semibold text-sm">
+                      &#127918; +50 XP for completing!
                     </div>
                   </div>
                 </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Blog Section - Light Theme */}
-      <section id="insights" className="py-24 px-4 bg-white">
-        <div className="container mx-auto max-w-5xl">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
-              Insights for peptide clinics.
-            </h2>
-            <p className="text-gray-500 max-w-2xl mx-auto font-light">
-              Stay ahead with the latest on compliance, patient care, and practice growth.
-            </p>
-          </div>
-          <BlogCardStack />
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-24 px-4 bg-gray-50">
-        <div className="container mx-auto max-w-4xl">
-          <div className="bg-white backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-gray-200 text-center relative overflow-hidden shadow-xl">
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 to-transparent pointer-events-none"></div>
-            <div className="relative z-10">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight text-gray-900 mb-4">
-                Ready to transform your practice?
-              </h2>
-              <p className="text-gray-500 mb-8 max-w-lg mx-auto font-light">
-                Join the growing number of dental practices using Homebase to eliminate password chaos, centralize 2FA codes, and secure their team's access.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link href="/auth/clinic-register">
-                  <Button size="lg" className="bg-gray-900 hover:bg-gray-800 text-white px-8">
-                    Register Your Clinic
-                    <ArrowRight className="ml-2 h-5 w-5" strokeWidth={1.5} />
-                  </Button>
-                </Link>
-                <a href="mailto:hello@homebase.dental?subject=Schedule%20a%20Demo%20-%20Homebase&body=Hi%2C%0A%0AI%27d%20like%20to%20schedule%20a%20demo%20of%20Homebase%20for%20my%20practice.%0A%0AName%3A%0APractice%20Name%3A%0APhone%3A%0A%0AThank%20you!">
-                  <Button size="lg" variant="outline" className="bg-transparent border-gray-300 text-gray-700 hover:bg-gray-100 hover:border-gray-400 px-8">
-                    Schedule Demo
-                  </Button>
-                </a>
               </div>
             </div>
           </div>
+
+          {/* AI Automation Feature */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-[120px]">
+            <div className="order-2 lg:order-1 bg-[#111111] border border-[#262626] rounded-3xl p-8">
+              <div className="space-y-4">
+                {/* AI Card 1 */}
+                <div className="bg-[#1A1A1A] border border-[#404040] rounded-xl p-5">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-white font-semibold text-[0.95rem]">
+                      AI Claim Processing
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-[rgba(0,180,216,0.1)] text-[#00B4D8]">
+                      Processing
+                    </span>
+                  </div>
+                  <div className="space-y-2.5">
+                    <div className="flex justify-between py-2.5 border-b border-[#262626]">
+                      <span className="text-[#A3A3A3] text-sm">Claims Submitted Today</span>
+                      <span className="text-white font-medium">47</span>
+                    </div>
+                    <div className="flex justify-between py-2.5 border-b border-[#262626]">
+                      <span className="text-[#A3A3A3] text-sm">Auto-Verified</span>
+                      <span className="text-[#22C55E] font-medium">43 (91%)</span>
+                    </div>
+                    <div className="flex justify-between py-2.5">
+                      <span className="text-[#A3A3A3] text-sm">Flagged for Review</span>
+                      <span className="text-[#FBBF24] font-medium">4</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* AI Card 2 */}
+                <div className="bg-[#1A1A1A] border border-[#404040] rounded-xl p-5">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-white font-semibold text-[0.95rem]">
+                      Invoice Generation
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-[rgba(34,197,94,0.1)] text-[#22C55E]">
+                      Complete
+                    </span>
+                  </div>
+                  <div className="flex justify-between py-2.5">
+                    <span className="text-[#A3A3A3] text-sm">Patient: Sarah Johnson</span>
+                    <span className="text-white font-medium">$1,247.00</span>
+                  </div>
+                  <div className="h-2 bg-[#111111] rounded mt-3 overflow-hidden">
+                    <div className="h-full w-full bg-gradient-to-r from-[#00B4D8] to-[#22C55E] rounded" />
+                  </div>
+                </div>
+
+                {/* AI Card 3 */}
+                <div className="bg-[#1A1A1A] border border-[#404040] rounded-xl p-5">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-white font-semibold text-[0.95rem]">
+                      Data Verification
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-[rgba(34,197,94,0.1)] text-[#22C55E]">
+                      Verified
+                    </span>
+                  </div>
+                  <div className="space-y-2.5">
+                    <div className="flex justify-between py-2.5 border-b border-[#262626]">
+                      <span className="text-[#A3A3A3] text-sm">Insurance Eligibility</span>
+                      <span className="text-[#22C55E] font-medium">&#10003; Active</span>
+                    </div>
+                    <div className="flex justify-between py-2.5">
+                      <span className="text-[#A3A3A3] text-sm">Address Match</span>
+                      <span className="text-[#22C55E] font-medium">&#10003; Verified</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="order-1 lg:order-2">
+              <span className="section-eyebrow">AI Automation</span>
+              <h3 className="text-[2rem] font-bold text-white mb-4">
+                Your billing team — now 10x more productive.
+              </h3>
+              <p className="text-[#A3A3A3] text-lg leading-relaxed mb-8">
+                Homebase AI handles the tedious work: generating invoices, submitting claims,
+                reconciling payments, and following up on denials. Your team focuses on what humans
+                do best.
+              </p>
+
+              <div className="grid grid-cols-3 gap-6 mb-8">
+                {[
+                  { value: "$40K+", label: "Saved in denied claims" },
+                  { value: "70%", label: "Less manual entry" },
+                  { value: "48hr", label: "Faster reimbursement" },
+                ].map((stat, i) => (
+                  <div
+                    key={i}
+                    className="bg-[#1A1A1A] border border-[#262626] rounded-xl p-5 text-center"
+                  >
+                    <div className="text-2xl font-bold text-[#00B4D8] mb-1">{stat.value}</div>
+                    <div className="text-xs text-[#737373]">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              <Link href="#demo" className="btn btn-primary">
+                See AI in Action
+              </Link>
+            </div>
+          </div>
+
+          {/* Payments Feature */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div>
+              <span className="section-eyebrow">Payments</span>
+              <h3 className="text-[2rem] font-bold text-white mb-4">
+                Get paid faster. Way faster.
+              </h3>
+              <p className="text-[#A3A3A3] text-lg leading-relaxed mb-8">
+                Integrated payment processing means patients can pay with one tap. Insurance
+                reimbursements flow directly into your account. No more chasing checks or manual
+                reconciliation.
+              </p>
+
+              <div className="grid grid-cols-3 gap-6 mb-8">
+                {[
+                  { value: "2 days", label: "Avg. deposit time" },
+                  { value: "0.3%", label: "Processing rate" },
+                  { value: "$0", label: "Hidden fees" },
+                ].map((stat, i) => (
+                  <div
+                    key={i}
+                    className="bg-[#1A1A1A] border border-[#262626] rounded-xl p-5 text-center"
+                  >
+                    <div className="text-2xl font-bold text-[#00B4D8] mb-1">{stat.value}</div>
+                    <div className="text-xs text-[#737373]">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              <Link href="#demo" className="btn btn-primary">
+                Learn More
+              </Link>
+            </div>
+
+            <div className="bg-[#111111] border border-[#262626] rounded-3xl p-8">
+              {/* Payment Stats Card */}
+              <div className="bg-gradient-to-br from-[#1A1A1A] to-[#111111] border border-[#404040] rounded-2xl p-6 mb-4">
+                <div className="text-4xl font-bold text-white mb-1">$127,432</div>
+                <div className="text-sm text-[#737373] mb-5">Collected This Month</div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-[#0A0A0A] rounded-lg p-3">
+                    <div className="text-white font-semibold text-lg">$89,210</div>
+                    <div className="text-[#737373] text-xs">Insurance Payments</div>
+                  </div>
+                  <div className="bg-[#0A0A0A] rounded-lg p-3">
+                    <div className="text-white font-semibold text-lg">$38,222</div>
+                    <div className="text-[#737373] text-xs">Patient Payments</div>
+                  </div>
+                  <div className="bg-[#0A0A0A] rounded-lg p-3">
+                    <div className="text-[#22C55E] font-semibold text-lg">+12.4%</div>
+                    <div className="text-[#737373] text-xs">vs. Last Month</div>
+                  </div>
+                  <div className="bg-[#0A0A0A] rounded-lg p-3">
+                    <div className="text-white font-semibold text-lg">$4,820</div>
+                    <div className="text-[#737373] text-xs">Pending</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Recent Transactions */}
+              <div className="bg-[#1A1A1A] border border-[#404040] rounded-xl p-5">
+                <div className="text-white font-semibold text-[0.95rem] mb-4">
+                  Recent Transactions
+                </div>
+                <div className="space-y-2.5">
+                  <div className="flex justify-between py-2.5 border-b border-[#262626]">
+                    <span className="text-[#A3A3A3] text-sm">Delta Dental - ERA #4821</span>
+                    <span className="text-[#22C55E] font-medium">+$2,847.00</span>
+                  </div>
+                  <div className="flex justify-between py-2.5 border-b border-[#262626]">
+                    <span className="text-[#A3A3A3] text-sm">Patient: Mike Thompson</span>
+                    <span className="text-[#22C55E] font-medium">+$347.00</span>
+                  </div>
+                  <div className="flex justify-between py-2.5">
+                    <span className="text-[#A3A3A3] text-sm">MetLife - ERA #3912</span>
+                    <span className="text-[#22C55E] font-medium">+$1,223.00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section
+        id="pricing"
+        className="py-[120px] bg-gradient-to-b from-transparent via-[#111111] to-transparent"
+      >
+        <div className="max-w-[1200px] mx-auto px-6">
+          <div className="text-center mb-16">
+            <span className="section-eyebrow">Pricing</span>
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-white mb-4">
+              Simple pricing. Massive value.
+            </h2>
+            <p className="text-lg text-[#A3A3A3] max-w-[600px] mx-auto">
+              Start with what you need. Add modules as you grow.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1000px] mx-auto">
+            {/* Essentials */}
+            <div className="bg-[#1A1A1A] border border-[#262626] rounded-3xl p-10 hover:-translate-y-2 transition-all">
+              <div className="text-[#A3A3A3] text-sm mb-2">Essentials</div>
+              <div className="flex items-baseline gap-1 mb-2">
+                <span className="text-5xl font-bold text-white">$149</span>
+                <span className="text-[#737373]">/mo per location</span>
+              </div>
+              <p className="text-[#A3A3A3] text-[0.95rem] mb-6 pb-6 border-b border-[#262626]">
+                Credentials, 2FA, and basic team management.
+              </p>
+              <ul className="space-y-3 mb-8">
+                {[
+                  "Credential vault",
+                  "2FA centralization",
+                  "350+ portal integrations",
+                  "Unlimited users",
+                  "Audit logs",
+                  "Email support",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-3 text-[#D4D4D4] text-[0.95rem]"
+                  >
+                    <Check className="w-[18px] h-[18px] text-[#00B4D8] flex-shrink-0 mt-0.5" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="#demo"
+                className="btn btn-secondary w-full justify-center"
+              >
+                Start Free Trial
+              </Link>
+            </div>
+
+            {/* Professional - Featured */}
+            <div className="bg-[#1A1A1A] border border-[#00B4D8] rounded-3xl p-10 relative shadow-[0_0_60px_rgba(0,180,216,0.25)] hover:-translate-y-2 transition-all">
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-gradient-to-r from-[#00B4D8] to-[#8B5CF6] text-white text-xs font-semibold rounded-full">
+                Most Popular
+              </span>
+              <div className="text-[#A3A3A3] text-sm mb-2">Professional</div>
+              <div className="flex items-baseline gap-1 mb-2">
+                <span className="text-5xl font-bold text-white">$349</span>
+                <span className="text-[#737373]">/mo per location</span>
+              </div>
+              <p className="text-[#A3A3A3] text-[0.95rem] mb-6 pb-6 border-b border-[#262626]">
+                Full platform with AI automation and onboarding.
+              </p>
+              <ul className="space-y-3 mb-8">
+                {[
+                  "Everything in Essentials",
+                  "AI invoice automation",
+                  "Gamified patient onboarding",
+                  "Data verification",
+                  "Insurance eligibility checks",
+                  "Priority support",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-3 text-[#D4D4D4] text-[0.95rem]"
+                  >
+                    <Check className="w-[18px] h-[18px] text-[#00B4D8] flex-shrink-0 mt-0.5" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link href="#demo" className="btn btn-primary w-full justify-center">
+                Start Free Trial
+              </Link>
+            </div>
+
+            {/* Enterprise */}
+            <div className="bg-[#1A1A1A] border border-[#262626] rounded-3xl p-10 hover:-translate-y-2 transition-all">
+              <div className="text-[#A3A3A3] text-sm mb-2">Enterprise</div>
+              <div className="flex items-baseline gap-1 mb-2">
+                <span className="text-5xl font-bold text-white">Custom</span>
+              </div>
+              <p className="text-[#A3A3A3] text-[0.95rem] mb-6 pb-6 border-b border-[#262626]">
+                For DSOs with 10+ locations. Everything customized.
+              </p>
+              <ul className="space-y-3 mb-8">
+                {[
+                  "Everything in Professional",
+                  "Integrated payment processing",
+                  "SSO & SCIM",
+                  "Custom integrations",
+                  "Dedicated success manager",
+                  "Volume discounts",
+                ].map((item, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-3 text-[#D4D4D4] text-[0.95rem]"
+                  >
+                    <Check className="w-[18px] h-[18px] text-[#00B4D8] flex-shrink-0 mt-0.5" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="#demo"
+                className="btn btn-secondary w-full justify-center"
+              >
+                Contact Sales
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-[120px]">
+        <div className="max-w-[1200px] mx-auto px-6">
+          <div className="text-center mb-16">
+            <span className="section-eyebrow">Testimonials</span>
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-white mb-4">
+              Practices love Homebase
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                text: '"We went from losing $30K/year in denied claims to nearly zero. The AI catches errors we never would have found. It paid for itself in the first month."',
+                name: "Dr. Michael R.",
+                role: "Owner, 5-location DSO",
+                initials: "DM",
+                gradient: "from-[#00B4D8] to-[#8B5CF6]",
+              },
+              {
+                text: '"The patient onboarding is incredible. 95% of patients complete forms before arriving. Our front desk staff actually has time to breathe now."',
+                name: "Lisa T.",
+                role: "Office Manager, Austin TX",
+                initials: "LT",
+                gradient: "from-[#22C55E] to-[#00B4D8]",
+              },
+              {
+                text: '"Finally, ONE platform that does everything. No more juggling 15 different logins and tools. Homebase is the command center we always needed."',
+                name: "Jennifer K.",
+                role: "RCM Director, Smile Partners",
+                initials: "JK",
+                gradient: "from-[#8B5CF6] to-[#EF4444]",
+              },
+            ].map((testimonial, i) => (
+              <div
+                key={i}
+                className="bg-[#111111] border border-[#262626] rounded-2xl p-8 hover:border-[#00B4D8] hover:-translate-y-1 transition-all"
+              >
+                <div className="text-[#FBBF24] mb-4">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p className="text-[#D4D4D4] leading-relaxed mb-6">{testimonial.text}</p>
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`w-12 h-12 rounded-full bg-gradient-to-br ${testimonial.gradient} flex items-center justify-center text-white font-semibold`}
+                  >
+                    {testimonial.initials}
+                  </div>
+                  <div>
+                    <div className="text-white font-semibold">{testimonial.name}</div>
+                    <div className="text-[#737373] text-sm">{testimonial.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Security Section */}
+      <section id="security" className="py-[120px] bg-[#111111]">
+        <div className="max-w-[1200px] mx-auto px-6">
+          <div className="text-center mb-16">
+            <span className="section-eyebrow">Security</span>
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-white mb-4">
+              Your data is safe with us
+            </h2>
+            <p className="text-lg text-[#A3A3A3] max-w-[600px] mx-auto">
+              Enterprise-grade security, built for healthcare compliance.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: ShieldCheck,
+                title: "HIPAA Compliant",
+                desc: "BAA included with every plan",
+              },
+              {
+                icon: Lock,
+                title: "Zero-Knowledge",
+                desc: "We can't see your passwords",
+              },
+              {
+                icon: Key,
+                title: "256-bit Encryption",
+                desc: "Bank-level security",
+              },
+              {
+                icon: Users,
+                title: "Role-Based Access",
+                desc: "Complete audit trails",
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="bg-[#0A0A0A] border border-[#262626] rounded-2xl p-6 text-center hover:border-[#00B4D8] transition-all"
+              >
+                <div className="w-14 h-14 bg-[rgba(0,180,216,0.1)] rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <item.icon className="w-7 h-7 text-[#00B4D8]" />
+                </div>
+                <h4 className="text-white font-semibold mb-2">{item.title}</h4>
+                <p className="text-[#737373] text-sm">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section id="demo" className="py-[160px] text-center relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(0,180,216,0.25)_0%,transparent_60%)] opacity-50 pointer-events-none" />
+
+        <div className="max-w-[1200px] mx-auto px-6 relative z-10">
+          <h2 className="text-[clamp(2rem,4vw,3.5rem)] font-bold text-white mb-4">
+            Ready to transform your practice?
+          </h2>
+          <p className="text-lg text-[#A3A3A3] max-w-[600px] mx-auto mb-10">
+            Join the practices saving $40K+ per year and reclaiming hours every week.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            <a
+              href="https://calendly.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary btn-large"
+            >
+              Schedule Your Demo &rarr;
+            </a>
+            <button onClick={() => scrollToSection("pricing")} className="btn btn-secondary btn-large">
+              View Pricing
+            </button>
+          </div>
+
+          <p className="text-sm text-[#737373]">
+            Free 30-day trial &bull; No credit card required &bull; Setup in 30 minutes
+          </p>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-4 border-t border-gray-200 bg-white">
-        <div className="container mx-auto max-w-6xl">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <Image
-                src="/homebase-logo.png"
-                alt="Homebase"
-                width={140}
-                height={28}
-                className="h-7 w-auto opacity-70"
-              />
+      <footer className="border-t border-[#262626] py-20">
+        <div className="max-w-[1200px] mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-12 mb-16">
+            {/* Brand */}
+            <div className="col-span-2">
+              <Link href="/" className="flex items-center mb-4">
+                <Image
+                  src="/homebase-logo.png"
+                  alt="Homebase"
+                  width={140}
+                  height={35}
+                  className="h-7 w-auto opacity-80"
+                />
+              </Link>
+              <p className="text-[#737373] text-[0.95rem] max-w-[280px]">
+                The operating system for modern dental practices. Credentials, AI, onboarding, and
+                payments — all in one platform.
+              </p>
             </div>
-            <div className="flex items-center gap-6 text-sm text-gray-500">
-              <span>One login. Every portal.</span>
+
+            {/* Platform */}
+            <div>
+              <h4 className="text-white text-sm font-semibold mb-5">Platform</h4>
+              <ul className="space-y-3">
+                {["Credentials", "AI Automation", "Patient Onboarding", "Payments"].map((item) => (
+                  <li key={item}>
+                    <Link href="#" className="text-[#737373] hover:text-white text-sm transition-colors">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="flex items-center gap-6 text-sm text-gray-500">
-              <Link href="#" className="hover:text-gray-700 transition-colors">Privacy</Link>
-              <Link href="#" className="hover:text-gray-700 transition-colors">Terms</Link>
-              <Link href="#" className="hover:text-gray-700 transition-colors">Contact</Link>
+
+            {/* Company */}
+            <div>
+              <h4 className="text-white text-sm font-semibold mb-5">Company</h4>
+              <ul className="space-y-3">
+                {["About", "Blog", "Careers", "Contact"].map((item) => (
+                  <li key={item}>
+                    <Link href="#" className="text-[#737373] hover:text-white text-sm transition-colors">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Resources */}
+            <div>
+              <h4 className="text-white text-sm font-semibold mb-5">Resources</h4>
+              <ul className="space-y-3">
+                {["Help Center", "API Docs", "Trust Center", "Status"].map((item) => (
+                  <li key={item}>
+                    <Link href="#" className="text-[#737373] hover:text-white text-sm transition-colors">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Legal */}
+            <div>
+              <h4 className="text-white text-sm font-semibold mb-5">Legal</h4>
+              <ul className="space-y-3">
+                {["Privacy", "Terms", "BAA", "Security"].map((item) => (
+                  <li key={item}>
+                    <Link href="#" className="text-[#737373] hover:text-white text-sm transition-colors">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-          <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm text-gray-400">
-            &copy; {new Date().getFullYear()} Homebase. All rights reserved.
+
+          <div className="flex flex-col md:flex-row items-center justify-between pt-10 border-t border-[#262626]">
+            <p className="text-[#525252] text-sm">
+              &copy; {new Date().getFullYear()} Homebase. All rights reserved. Powered by PayPro.
+            </p>
           </div>
         </div>
       </footer>
-    </DigitalSerenity>
+    </div>
   )
 }
